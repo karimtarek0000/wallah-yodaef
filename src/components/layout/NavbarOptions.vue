@@ -4,7 +4,7 @@
     <div class="height-9rem">
       <img
         class="resize-img d-block margin-start-auto"
-        src="/logo/logo.svg"
+        src="/logo/logo.png"
         alt="logo"
       />
     </div>
