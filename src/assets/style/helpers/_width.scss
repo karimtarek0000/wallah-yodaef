@@ -1,0 +1,69 @@
+////////////////////////////
+// 1) - Width
+@each $widthSize in $chooseWidth {
+  .width-#{$widthSize} {
+    @if type-of($widthSize) == "number" {
+      width: #{$widthSize#{"%"}};
+    } @else {
+      width: #{$widthSize};
+    }
+  }
+}
+
+///////////////////////////////////////////////
+/// RESPONSIVE
+////////////////////////////
+// 2) - Width - XLG
+@each $widthSize in $chooseWidth {
+  .xlg-width-#{$widthSize} {
+    @include BreakPoint(xlg) {
+      @if type-of($widthSize) == "number" {
+        width: #{$widthSize#{"%"}};
+      } @else {
+        width: #{$widthSize};
+      }
+    }
+  }
+}
+
+////////////////////////////
+// 3) - Width - LG
+@each $widthSize in $chooseWidth {
+  .lg-width-#{$widthSize} {
+    @include BreakPoint(lg) {
+      @if type-of($widthSize) == "number" {
+        width: #{$widthSize#{"%"}};
+      } @else {
+        width: #{$widthSize};
+      }
+    }
+  }
+}
+
+////////////////////////////
+// 4) - Width - MD
+@each $widthSize in $chooseWidth {
+  .md-width-#{$widthSize} {
+    @include BreakPoint(md) {
+      @if type-of($widthSize) == "number" {
+        width: #{$widthSize#{"%"}};
+      } @else {
+        width: #{$widthSize};
+      }
+    }
+  }
+}
+
+////////////////////////////
+// 5) - Width - SM
+@each $widthSize in $chooseWidth {
+  .sm-width-#{$widthSize} {
+    @include BreakPoint(sm) {
+      @if type-of($widthSize) == "number" {
+        width: #{$widthSize#{"%"}};
+      } @else {
+        width: #{$widthSize};
+      }
+    }
+  }
+}

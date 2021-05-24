@@ -1,0 +1,81 @@
+////////////////////////////
+// 1) - Height
+@each $heightSize in $chooseHeight {
+  .height-#{$heightSize} {
+    @if type-of($heightSize) == "number" {
+      height: #{$heightSize#{"%"}};
+    } @else {
+      height: #{$heightSize};
+    }
+  }
+}
+
+///////////////////////////////////////////////
+/// RESPONSIVE
+////////////////////////////
+// 2) - Height - XLG
+@each $heightSize in $chooseHeight {
+  .xlg-height-#{$heightSize} {
+    @include BreakPoint(xlg) {
+      @if type-of($heightSize) == "number" {
+        height: #{$heightSize#{"%"}};
+      } @else {
+        height: #{$heightSize};
+      }
+    }
+  }
+}
+
+////////////////////////////
+// 3) - Height - LG
+@each $heightSize in $chooseHeight {
+  .lg-height-#{$heightSize} {
+    @include BreakPoint(lg) {
+      @if type-of($heightSize) == "number" {
+        height: #{$heightSize#{"%"}};
+      } @else {
+        height: #{$heightSize};
+      }
+    }
+  }
+}
+
+////////////////////////////
+// 4) - Height - MD
+@each $heightSize in $chooseHeight {
+  .md-height-#{$heightSize} {
+    @include BreakPoint(md) {
+      @if type-of($heightSize) == "number" {
+        height: #{$heightSize#{"%"}};
+      } @else {
+        height: #{$heightSize};
+      }
+    }
+  }
+}
+
+////////////////////////////
+// 5) - Height - SM
+@each $heightSize in $chooseHeight {
+  .sm-height-#{$heightSize} {
+    @include BreakPoint(sm) {
+      @if type-of($heightSize) == "number" {
+        height: #{$heightSize#{"%"}};
+      } @else {
+        height: #{$heightSize};
+      }
+    }
+  }
+}
+
+////////////////////////////
+// 2) - MIN Height
+@each $heightSize in $chooseMinHeight {
+  .min-height-#{$heightSize} {
+    @if type-of($heightSize) == "number" {
+      height: #{$heightSize#{"%"}};
+    } @else {
+      height: #{$heightSize};
+    }
+  }
+}

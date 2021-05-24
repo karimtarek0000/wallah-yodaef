@@ -1,0 +1,53 @@
+////////////////////////////
+// 1) Class => obj img
+.resize-img {
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+////////////////////////////
+// 2) Class => overflow hidden
+.overflow-hidden {
+  overflow: hidden;
+}
+
+////////////////////////////
+// 3) Class => text transform
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+////////////////////////////
+// 4) ADD CLASSES BORDER RADUIS
+@each $name, $size in $borderRaduis {
+  .radius-#{$name} {
+    border-radius: $size;
+  }
+}
+
+////////////////////////////
+// 5) - Other
+//
+.unstyled {
+  list-style-type: none;
+}
+
+//
+.cursor-pointer {
+  cursor: pointer;
+}
+
+//
+.text-align-center {
+  text-align: center;
+}

@@ -1,0 +1,29 @@
+<template>
+  <svg>
+    <use :xlink:href="`/icons/${src}.svg` + '#icon-' + nameIcon">
+      <title v-text="title" />
+    </use>
+  </svg>
+</template>
+
+<script>
+export default {
+  name: "GSvg",
+  props: {
+    title: {
+      type: String,
+      default: "icon",
+    },
+    src: {
+      type: String,
+      default: "sprite",
+    },
+    nameIcon: {
+      type: String,
+      required: true,
+    },
+  },
+};
+</script>
+
+<style></style>

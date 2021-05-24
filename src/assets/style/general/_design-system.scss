@@ -1,0 +1,143 @@
+////////////////////////////
+// All Colors Variables
+$red-light: #308664;
+$light: #f2f2f2;
+$light-1: #ffffff;
+$gray: #b5b5b5;
+////////////////////////////
+// 1) Themes Colors
+$themes: (
+  red-light: $red-light,
+  light: $light,
+  light-1: $light-1,
+  gray: $gray,
+);
+
+////////////////////////////
+// 2) Font
+$font: (
+  family: "Almarai",
+  weight: ":wght@300;400",
+  addWeight: (
+    normal: 300,
+    bold: 400,
+  ),
+  sizes: (
+    16: 1.6rem,
+    14: 1.4rem,
+  ),
+);
+
+$customFont: (
+  status: false,
+  name: "",
+  src: "",
+  weights: (
+    bold: (
+      ext: "",
+      weight: null,
+    ),
+    medium: (
+      ext: "",
+      weight: null,
+    ),
+    regular: (
+      ext: "",
+      weight: null,
+    ),
+  ),
+);
+
+// Choose color text
+// Ex => first-color second-color ..etc if null will render all themes
+$chooseColorText: null;
+
+////////////////////////////
+/// 3) - SVG
+// SVG - SIZE
+$svg: (
+  30: 3rem,
+  20: 2rem,
+);
+
+// Choose fill svg
+// Ex => first-color second-color ..etc if null will render all themes
+$chooseFillSvg: "gray";
+
+////////////////////////////
+/// 4) - DISPLAY
+// Choose type display will add classes
+// Ex => flex - grid - block - inline-block - table - box
+$chooseDisplay: "flex", "block";
+
+// Choose type aligment will add classes
+// Ex => justify-content - align-items - align-self - align-content
+$chooseAligmentFlex: "justify-content", "align-items", "align-self",
+  "flex-direction";
+
+// Choose type aligment will add classes
+// Ex => flex-grow flex-shrink
+$chooseGrowAndShrink: "flex-grow", "flex-shrink";
+
+// Choose flex basis
+// Ex => "200px" 30 = 30%
+$flexBasis: "90px";
+
+////////////////////////////
+/// 5) - WIDTH
+// Choose width will add classes
+// Ex => 60 = 60% other write "40px" "40rem" "40em" "40vw"
+$chooseWidth: "90px", 100;
+
+////////////////////////////
+/// 6) - HEIGHT
+// Choose height will add classes
+// Ex => 60 = 60% other write "40px" "40rem" "40em" "40vh"
+$chooseHeight: "100vh", "9rem", 100;
+
+////////////////////////////
+/// 6) - HEIGHT
+// Choose height will add classes
+// Ex => 60 = 60% other write "40px" "40rem" "40em" "40vh"
+$chooseMinHeight: "90vh";
+
+////////////////////////////
+/// 7) - POSITION
+$choosePosition: (
+  rel: relative,
+  abs: absolute,
+  // ini: initial,
+  // sti: sticky,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+);
+
+////////////////////////////
+// 8) Padding
+$padding: (
+  20: 2rem,
+  10: 1rem,
+  5: 5px,
+);
+
+////////////////////////////
+// 9) Margin
+$margin: (
+  auto: auto,
+  20: 2rem,
+  10: 1rem,
+);
+
+////////////////////////////
+// 10) BORDER RADUIS
+$borderRaduis: (
+  card: 2rem 2rem 0 0,
+);
+
+////////////////////////////
+// 11) OTHER
+// Prorperty Change Scroll Bar
+$colorTrack: null;
+$colorThumb: null;
+$widthTrack: null;
+
+// Change Color Selection
+$colorSelection: null;

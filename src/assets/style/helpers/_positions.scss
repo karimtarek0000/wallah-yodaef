@@ -1,0 +1,44 @@
+// 1) - Add classes position => relative - absolute - stackiy ..etc
+@each $name, $type in $choosePosition {
+  .position-#{$name} {
+    position: $type;
+  }
+}
+
+//////////////////////////////////////////////////////////////
+/// RESPONSIVE
+// 1) - XLG
+@each $name, $type in $choosePosition {
+  .xlg-position-#{$name} {
+    @include BreakPoint(xlg) {
+      position: $type;
+    }
+  }
+}
+
+// 2) - LG
+@each $name, $type in $choosePosition {
+  .lg-position-#{$name} {
+    @include BreakPoint(lg) {
+      position: $type;
+    }
+  }
+}
+
+// 3) - LG
+@each $name, $type in $choosePosition {
+  .md-position-#{$name} {
+    @include BreakPoint(md) {
+      position: $type;
+    }
+  }
+}
+
+// 4) - SM
+@each $name, $type in $choosePosition {
+  .sm-position-#{$name} {
+    @include BreakPoint(sm) {
+      position: $type;
+    }
+  }
+}
