@@ -67,3 +67,17 @@
     }
   }
 }
+
+////////////////////////////
+// Max Width
+@each $widthSize in $chooseMaxWidth {
+  .max-width-#{$widthSize} {
+    @include BreakPoint(sm) {
+      @if type-of($widthSize) == "number" {
+        max-width: #{$widthSize#{"%"}};
+      } @else {
+        max-width: #{$widthSize};
+      }
+    }
+  }
+}

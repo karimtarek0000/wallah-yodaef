@@ -73,9 +73,21 @@
 @each $heightSize in $chooseMinHeight {
   .min-height-#{$heightSize} {
     @if type-of($heightSize) == "number" {
-      height: #{$heightSize#{"%"}};
+      min-height: #{$heightSize#{"%"}};
     } @else {
-      height: #{$heightSize};
+      min-height: #{$heightSize};
+    }
+  }
+}
+
+////////////////////////////
+// 3) - Max Height
+@each $heightSize in $chooseMaxHeight {
+  .min-height-#{$heightSize} {
+    @if type-of($heightSize) == "number" {
+      max-height: #{$heightSize#{"%"}};
+    } @else {
+      max-height: #{$heightSize};
     }
   }
 }

@@ -4,6 +4,7 @@ $red-light: #308664;
 $light: #f2f2f2;
 $light-1: #ffffff;
 $gray: #b5b5b5;
+$black-alpha: rgba(black, 0.5);
 ////////////////////////////
 // 1) Themes Colors
 $themes: (
@@ -11,6 +12,7 @@ $themes: (
   light: $light,
   light-1: $light-1,
   gray: $gray,
+  black-alpha: $black-alpha,
 );
 
 ////////////////////////////
@@ -23,8 +25,12 @@ $font: (
     bold: 400,
   ),
   sizes: (
-    16: 1.6rem,
     14: 1.4rem,
+    16: 1.6rem,
+    18: 1.8rem,
+    20: 2rem,
+    22: 2.2rem,
+    25: 2.5rem,
   ),
 );
 
@@ -50,7 +56,7 @@ $customFont: (
 
 // Choose color text
 // Ex => first-color second-color ..etc if null will render all themes
-$chooseColorText: null;
+$chooseColorText: "light", "gray", "red-light";
 
 ////////////////////////////
 /// 3) - SVG
@@ -58,11 +64,12 @@ $chooseColorText: null;
 $svg: (
   30: 3rem,
   20: 2rem,
+  80: 8rem,
 );
 
 // Choose fill svg
 // Ex => first-color second-color ..etc if null will render all themes
-$chooseFillSvg: "gray";
+$chooseFillSvg: "gray", "light";
 
 ////////////////////////////
 /// 4) - DISPLAY
@@ -73,7 +80,7 @@ $chooseDisplay: "flex", "block";
 // Choose type aligment will add classes
 // Ex => justify-content - align-items - align-self - align-content
 $chooseAligmentFlex: "justify-content", "align-items", "align-self",
-  "flex-direction";
+  "flex-direction", "flex-wrap";
 
 // Choose type aligment will add classes
 // Ex => flex-grow flex-shrink
@@ -81,59 +88,76 @@ $chooseGrowAndShrink: "flex-grow", "flex-shrink";
 
 // Choose flex basis
 // Ex => "200px" 30 = 30%
-$flexBasis: "90px";
+$flexBasis: 32, 49, 100, "90px";
 
 ////////////////////////////
 /// 5) - WIDTH
 // Choose width will add classes
 // Ex => 60 = 60% other write "40px" "40rem" "40em" "40vw"
-$chooseWidth: "90px", 100;
+$chooseWidth: "90px", 100, 50, 70, 90, 60, "15rem", "50vw";
 
 ////////////////////////////
 /// 6) - HEIGHT
 // Choose height will add classes
 // Ex => 60 = 60% other write "40px" "40rem" "40em" "40vh"
-$chooseHeight: "100vh", "9rem", 100;
+$chooseHeight: "100vh", "9rem", 100, "50vh", "15rem";
 
 ////////////////////////////
-/// 6) - HEIGHT
-// Choose height will add classes
+/// 7) - MIN HEIGHT
+// Choose min height will add classes
 // Ex => 60 = 60% other write "40px" "40rem" "40em" "40vh"
-$chooseMinHeight: "90vh";
+$chooseMinHeight: "85vh";
 
 ////////////////////////////
-/// 7) - POSITION
+/// 8) - MAX HEIGHT
+// Choose max height will add classes
+// Ex => 60 = 60% other write "40px" "40rem" "40em" "40vh"
+$chooseMaxHeight: "85vh";
+
+////////////////////////////
+/// 9) - MAX WIDTH
+// Choose max width will add classes
+// Ex => 60 = 60% other write "40px" "40rem" "40em" "40vh"
+$chooseMaxWidth: "50vw";
+
+////////////////////////////
+/// 10) - POSITION
 $choosePosition: (
   rel: relative,
   abs: absolute,
   // ini: initial,
-  // sti: sticky,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  // sti: sticky,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 );
 
 ////////////////////////////
-// 8) Padding
+// 11) Padding
 $padding: (
+  5: 5px,
+  10: 1rem,
+  20: 2rem,
+);
+
+////////////////////////////
+// 12) Margin
+$margin: (
+  auto: auto,
   20: 2rem,
   10: 1rem,
   5: 5px,
 );
 
 ////////////////////////////
-// 9) Margin
-$margin: (
-  auto: auto,
-  20: 2rem,
-  10: 1rem,
-);
-
-////////////////////////////
-// 10) BORDER RADUIS
+// 13) BORDER RADUIS
 $borderRaduis: (
   card: 2rem 2rem 0 0,
+  100: 10rem,
+  10: 1rem,
+  circle: 50%,
+  model: 3rem 3rem 0 0,
 );
 
 ////////////////////////////
-// 11) OTHER
+// 14) OTHER
 // Prorperty Change Scroll Bar
 $colorTrack: null;
 $colorThumb: null;

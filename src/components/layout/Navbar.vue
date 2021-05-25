@@ -4,6 +4,7 @@
     class="
       navbar
       xlg-basis-90px
+      lg-width-100
       flex-shrink-0
       shadow
       position-rel
@@ -13,7 +14,7 @@
     "
   >
     <!--  -->
-    <ul class="text-align-center d-lg-flex align-items-center bg-light-1">
+    <ul class="text-align-center d-lg-flex lg-width-100 bg-light-1">
       <!--  -->
       <routerLink
         v-for="item in allItems"
@@ -27,12 +28,14 @@
           :class="[
             isExactActive && 'router-exact-active',
             isActive && 'router-active',
-            'cursor-pointer lg-padding-x-2rem lg-padding-y-1rem xlg-padding-y-2rem text-16 weight-bold',
+            'cursor-pointer lg-flex-grow-1 lg-padding-x-2rem lg-padding-y-1rem xlg-padding-y-2rem xlg-padding-x-1rem text-gray text-16 weight-bold',
+            !item.name &&
+              'd-lg-flex lg-justify-content-center lg-align-items-center',
           ]"
           @click="navigate"
         >
           <GSvg
-            class="svg-30 fill-gray"
+            class="svg-20 fill-gray"
             :nameIcon="item.icon"
             :title="item.name"
           />
@@ -89,11 +92,29 @@ export default {
   @include BreakPoint(lg) {
     order: 1;
   }
+
+  & ul li {
+    //
+    @include DetectHover {
+      //
+      &:hover {
+        color: $red-light !important;
+        background-color: lighten($gray, 20%);
+        transition: all 0.5s ease;
+
+        //
+        svg {
+          fill: $red-light;
+          transition: fill 0.5s ease;
+        }
+      }
+    }
+  }
 }
 //
 .router-exact-active,
 .router-active {
-  color: $red-light;
+  color: $red-light !important;
   background-color: lighten($gray, 20%);
   transition: all 0.5s ease;
 
@@ -106,6 +127,9 @@ export default {
 
 //
 .shadow {
-  box-shadow: -4px 0px 5px #9292922e;
+  box-shadow: 0px -4px 5px #9292922e;
+  @include BreakPoint(xlg) {
+    box-shadow: -4px 0px 5px #9292922e;
+  }
 }
 </style>

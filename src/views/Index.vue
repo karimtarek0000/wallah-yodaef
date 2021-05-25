@@ -20,12 +20,15 @@
           padding-1rem
           margin-top-2rem
           radius-card
-          min-height-90vh
+          overflow-auto
+          wrapper
         "
       >
         <router-view />
       </div>
     </div>
+    <!-- Model  -->
+    <Model />
   </div>
 </template>
 
@@ -33,11 +36,26 @@
 //
 import Navbar from "@/components/layout/Navbar";
 import NavbarOptions from "@/components/layout/NavbarOptions";
+import Model from "@/components/Model";
+//
 export default {
   name: "Index",
   components: {
     Navbar,
     NavbarOptions,
+    Model,
   },
 };
 </script>
+<style lang="scss">
+.wrapper {
+  @include scrollBar(5px, $gray, $red-light);
+  max-height: 85vh;
+  min-height: 85vh;
+  //
+  @include BreakPoint(lg) {
+    max-height: calc(100vh - 19rem);
+    min-height: calc(100vh - 19rem);
+  }
+}
+</style>
