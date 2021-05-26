@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Index from "../views/Index.vue";
-import Home from "../views/Home.vue";
+import Auth from "../views/auth/Auth.vue";
+import Register from "../views/auth/Register.vue";
 
 //
 Vue.use(VueRouter);
@@ -10,12 +10,14 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    component: Index,
+    component: () =>
+      import(/* webpackChunkName: "Index" */ "../views/Index.vue"),
     children: [
       {
         path: "/",
         name: "Home",
-        component: Home,
+        component: () =>
+          import(/* webpackChunkName: "Home" */ "../views/Home.vue"),
       },
       {
         path: "/donation",
@@ -40,6 +42,39 @@ const routes = [
         name: "MoreInfo",
         component: () =>
           import(/* webpackChunkName: "moreInfo" */ "../views/MoreInfo.vue"),
+      },
+    ],
+  },
+  {
+    path: "/auth",
+    name: "Auth",
+    component: Auth,
+    redirect: { name: "Register" },
+    children: [
+      {
+        path: "register",
+        name: "Register",
+        component: Register,
+      },
+      {
+        path: "sign-in",
+        name: "SignIn",
+        component: () =>
+          import(/* webpackChunkName: "SignIn" */ "../views/auth/SignIn.vue"),
+        meta: {
+          title: "تسجيل الدخول",
+          head: "تسجيل الدخول",
+        },
+      },
+      {
+        path: "sign-Up",
+        name: "SignUp",
+        component: () =>
+          import(/* webpackChunkName: "SignUp" */ "../views/auth/SignUp.vue"),
+        meta: {
+          title: "تسجيل جديد",
+          head: "انشاء حساب جديد",
+        },
       },
     ],
   },

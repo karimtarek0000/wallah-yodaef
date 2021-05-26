@@ -3,7 +3,14 @@
     v-show="statusModel.status"
     @click="close"
     ref="donation"
-    class="model-donation width-100 height-100 position-abs bg-black-alpha"
+    class="
+      model-donation
+      overflow-hidden
+      width-100
+      height-100
+      position-abs
+      bg-black-alpha
+    "
   >
     <!--  -->
     <transition name="slideUp">
@@ -159,6 +166,7 @@ export default {
 </script>
 
 <style lang="scss">
+//
 .model-donation {
   //
   &__wrapper {
@@ -193,11 +201,13 @@ export default {
   }
 }
 
+//
 .slideUp-enter-active {
   animation: slideUp 0.8s cubic-bezier(0.01, 0.44, 0.48, 1.01) forwards;
   will-change: animation;
 }
 
+//
 @keyframes slideUp {
   0% {
     transform: translateY(100%) translateX(-50%);

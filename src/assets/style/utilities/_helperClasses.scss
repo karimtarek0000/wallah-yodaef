@@ -68,19 +68,56 @@
   border: 1px solid lighten($red-light, 50%);
 }
 
+.border-all-red {
+  border: 1px solid $red-light;
+}
+
 input {
   all: unset;
   font-family: inherit;
+
+  &::placeholder {
+    opacity: 0.5;
+  }
 }
 
 .btn {
-  transition: all 0.5s ease;
   //
   &__red-light {
+    transition: all 0.5s ease;
     @include DetectHover {
       &:hover {
         background-color: lighten($red-light, 2%);
       }
+    }
+  }
+  &__light {
+    transition: all 0.5s ease;
+    @include DetectHover {
+      &:hover {
+        background-color: darken($light, 2%);
+      }
+    }
+  }
+}
+
+button {
+  display: block;
+}
+
+//
+.trans-back {
+  //
+  @include BreakPoint(xlg) {
+    background-color: transparent !important;
+  }
+}
+
+//
+.grediant {
+  &-light {
+    @include BreakPoint(lg) {
+      background-image: linear-gradient(to bottom, rgba($light, 1) 10%, white);
     }
   }
 }
