@@ -3,7 +3,7 @@
     role="register"
     class="
       register
-      height-100vh
+      min-height-100vh
       d-flex
       lg-flex-direction-column
       justify-content-center
@@ -34,25 +34,38 @@
         <img class="resize-img" src="/logo/logo-2.svg" alt="logo" />
       </figure>
       <!--  -->
-      <h1
-        role="description"
+      <div
         class="
-          lg-text-25
-          xlg-text-40
-          text-align-center
+          width-100
+          d-flex
+          flex-direction-column
+          align-items-center
           bg-light-1
           trans-back
-          lg-padding-y-2rem lg-align-self-stretch
-          text-red-light
-          weight-bold
         "
       >
-        {{ $route.meta.head }}
-      </h1>
+        <h1
+          role="description"
+          class="
+            lg-text-25
+            xlg-text-40
+            lg-padding-y-2rem
+            text-red-light
+            weight-bold
+          "
+        >
+          {{ $route.meta.head }}
+        </h1>
+        <slot name="par" />
+      </div>
     </div>
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
     <!-- Form -->
     <form
-      @submit.stop=""
+      @submit.prevent="submit"
       class="
         bg-light-1
         d-flex
@@ -62,8 +75,53 @@
         lg-height-100vh lg-padding-top-2rem
       "
     >
+      <!-- Name -->
+      <div
+        v-if="nameRender === 'signUp'"
+        class="
+          d-flex
+          xlg-width-60
+          md-width-90
+          lg-width-70
+          margin-bottom-2rem margin-x-auto
+          flex-direction-column
+        "
+      >
+        <label
+          for="name"
+          class="
+            text-red-light
+            weight-bold
+            padding-x-2rem
+            margin-bottom-1rem
+            xlg-text-20
+            text-25
+          "
+          >الاسم</label
+        >
+        <input
+          type="text"
+          id="name"
+          autocomplete="off"
+          v-model="$v.form.name.$model"
+          :class="[
+            'padding-y-1rem border-all-red-light padding-x-2rem xlg-text-18 text-22 weight-bold radius-100',
+            !$v.form.name.required && $v.form.name.$dirty && 'bg-light',
+          ]"
+          placeholder="الاسم"
+        />
+        <!-- Messages -->
+        <!-- Required -->
+        <p
+          class="padding-x-2rem text-16 margin-top-1rem"
+          v-if="!$v.form.name.required && $v.form.name.$dirty"
+        >
+          هذا الحقل مطلوب ادخاله
+        </p>
+      </div>
       <!-- Phone -->
       <div
+        v-if="nameRender !== 'passwordRecovery'"
         class="
           d-flex
           xlg-width-60
@@ -89,11 +147,11 @@
           type="text"
           id="tel"
           autocomplete="off"
-          v-model="$v.form.number.$model"
+          v-model="$v.form.phone.$model"
           :class="[
             'padding-y-1rem border-all-red-light padding-x-2rem xlg-text-18 text-22 weight-bold radius-100',
-            !$v.form.number.required && $v.form.number.$dirty && 'bg-light',
-            !$v.form.number.numeric && $v.form.number.$dirty && 'bg-light',
+            !$v.form.phone.required && $v.form.phone.$dirty && 'bg-light',
+            !$v.form.phone.numeric && $v.form.phone.$dirty && 'bg-light',
           ]"
           placeholder="رقم الجوال"
         />
@@ -101,20 +159,21 @@
         <!-- Required -->
         <p
           class="padding-x-2rem text-16 margin-top-1rem"
-          v-if="!$v.form.number.required && $v.form.number.$dirty"
+          v-if="!$v.form.phone.required && $v.form.phone.$dirty"
         >
           هذا الحقل مطلوب ادخاله
         </p>
         <!-- Error -->
         <p
           class="padding-x-2rem text-16"
-          v-if="!$v.form.number.numeric && $v.form.number.$dirty"
+          v-if="!$v.form.phone.numeric && $v.form.phone.$dirty"
         >
           يجب ادخال ارقام فقط
         </p>
       </div>
       <!-- Password -->
       <div
+        v-if="nameRender === 'signIn' || nameRender === 'signUp'"
         class="
           d-flex
           xlg-width-60
@@ -147,6 +206,7 @@
                 $v.form.password.$dirty &&
                 'bg-light',
               !$v.form.password.minLength &&
+                nameRender === 'signUp' &&
                 $v.form.password.$dirty &&
                 'bg-light',
             ]"
@@ -169,7 +229,7 @@
         <!-- Required -->
         <p
           role="error"
-          class="padding-x-2rem text-16"
+          class="padding-x-2rem text-16 margin-top-1rem"
           v-if="!$v.form.password.required && $v.form.password.$dirty"
         >
           هذا الحقل مطلوب ادخاله
@@ -177,14 +237,19 @@
         <!-- Error -->
         <p
           role="error"
-          class="padding-x-2rem text-16"
-          v-if="!$v.form.password.minLength && $v.form.password.$dirty"
+          class="padding-x-2rem text-16 margin-top-1rem"
+          v-if="
+            !$v.form.password.minLength &&
+            nameRender === 'signUp' &&
+            $v.form.password.$dirty
+          "
         >
           يجب الادخال لا يقل عن ١٠
         </p>
       </div>
       <!-- Confirm Password -->
       <div
+        v-if="nameRender === 'signUp'"
         class="
           d-flex
           xlg-width-60
@@ -245,7 +310,74 @@
           غير متوافق مع كلمة السر
         </p>
       </div>
+      <!-- Code -->
+      <div
+        v-if="nameRender === 'passwordRecovery'"
+        class="
+          d-flex
+          xlg-width-60
+          md-width-90
+          lg-width-70
+          margin-bottom-2rem margin-x-auto
+          flex-direction-column
+        "
+      >
+        <label
+          for="code"
+          class="
+            text-red-light
+            weight-bold
+            padding-x-2rem
+            margin-bottom-1rem
+            xlg-text-20
+            text-25
+          "
+          >الكود</label
+        >
+        <input
+          type="text"
+          id="code"
+          autocomplete="off"
+          v-model="$v.form.code.$model"
+          :class="[
+            'padding-y-1rem border-all-red-light padding-x-2rem xlg-text-18 text-22 weight-bold radius-100',
+            !$v.form.code.required && $v.form.code.$dirty && 'bg-light',
+            !$v.form.code.numeric && $v.form.code.$dirty && 'bg-light',
+          ]"
+          placeholder="الكود"
+        />
+        <!-- Messages -->
+        <!-- Required -->
+        <p
+          class="padding-x-2rem text-16 margin-top-1rem"
+          v-if="!$v.form.code.required && $v.form.code.$dirty"
+        >
+          هذا الحقل مطلوب ادخاله
+        </p>
+        <!-- Error -->
+        <p
+          class="padding-x-2rem text-16"
+          v-if="!$v.form.code.numeric && $v.form.code.$dirty"
+        >
+          يجب ادخال ارقام فقط
+        </p>
+      </div>
       <!--  -->
+      <router-link
+        v-if="nameRender === 'signIn'"
+        v-slot="{ navigate, href }"
+        custom
+        :to="{ name: 'ForgetPassword' }"
+      >
+        <a
+          role="question"
+          class="text-18 text-black weight-bold margin-y-2rem"
+          :href="href"
+          @click="navigate"
+          >هل نسيت كلمة السر ؟</a
+        >
+      </router-link>
+      <!-- Submit -->
       <BtnPrimary
         class="
           bg-red-light
@@ -256,19 +388,13 @@
           radius-100
           text-18
           lg-text-22
+          margin-top-2rem
         "
         type="submit"
-        nameBtn="انشاء حساب"
+        :nameBtn="nameBtn"
       />
-      <p role="qustion" class="text-22 xlg-text-16 margin-top-2rem">
-        هل لديك حساب ؟
-        <router-link
-          class="text-red-light weight-bold"
-          :to="{ name: 'SignIn' }"
-        >
-          تسجيل الدخول</router-link
-        >
-      </p>
+      <!-- Other any element if you want add ... -->
+      <slot />
     </form>
   </section>
 </template>
@@ -279,20 +405,35 @@ import { required, numeric, minLength, sameAs } from "vuelidate/lib/validators";
 //
 export default {
   name: "Form",
+  props: {
+    nameRender: {
+      type: String,
+      default: "signUp",
+    },
+    nameBtn: {
+      type: String,
+      required,
+    },
+  },
   data() {
     return {
       visible1: false,
       visible2: false,
       form: {
-        number: null,
+        name: null,
+        phone: null,
         password: null,
         confirmPassword: null,
+        code: null,
       },
     };
   },
   validations: {
     form: {
-      number: {
+      name: {
+        required,
+      },
+      phone: {
         required,
         numeric,
       },
@@ -303,9 +444,61 @@ export default {
       confirmPassword: {
         samePassword: sameAs("password"),
       },
+      code: {
+        required,
+        numeric,
+      },
     },
   },
   methods: {
+    submit() {
+      // Check Form
+      this.$v.$touch();
+
+      //
+      const { name, phone, password, confirmPassword, code } = this.form;
+
+      /////////////////////////////////////////
+      // Only sign up
+      if (
+        !this.$v.form.name.$invalid &&
+        !this.$v.form.phone.$invalid &&
+        !this.$v.form.password.$invalid &&
+        !this.$v.form.confirmPassword.$invalid &&
+        this.nameRender === "signUp"
+      ) {
+        //
+        this.$emit("dataForm", {
+          name,
+          phone,
+          password,
+          confirmPassword,
+        });
+      }
+
+      // Only sign in
+      if (
+        !this.$v.form.phone.$invalid &&
+        !this.$v.form.password.$invalid &&
+        this.nameRender === "signIn"
+      ) {
+        this.$emit("dataForm", {
+          phone,
+          password,
+        });
+      }
+
+      // Only forget password
+      if (!this.$v.form.phone.$invalid && this.nameRender === "forget") {
+        this.$emit("dataForm", phone);
+      }
+
+      // Only password recovery
+      if (!this.$v.form.code.$invalid) {
+        this.$emit("dataForm", code);
+      }
+    },
+    //
     goBack() {
       this.$router.go(-1);
     },

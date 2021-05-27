@@ -76,6 +76,30 @@ const routes = [
           head: "انشاء حساب جديد",
         },
       },
+      {
+        path: "forget-password",
+        name: "ForgetPassword",
+        component: () =>
+          import(
+            /* webpackChunkName: "ForgetPassword" */ "../views/auth/ForgetPassword.vue"
+          ),
+        meta: {
+          title: "نسيت كلمة السر",
+          head: "هل نسيت كلمة السر ؟",
+        },
+      },
+      {
+        path: "password-recovery",
+        name: "PasswordRecovery",
+        component: () =>
+          import(
+            /* webpackChunkName: "PasswordRecovery" */ "../views/auth/PasswordRecovery.vue"
+          ),
+        meta: {
+          title: "نسيت كلمة السر",
+          head: "هل نسيت كلمة السر ؟",
+        },
+      },
     ],
   },
 ];

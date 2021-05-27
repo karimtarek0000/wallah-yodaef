@@ -1,14 +1,22 @@
 <template>
-  <Form />
+  <Form nameRender="signIn" nameBtn="تسجيل الدخول" @dataForm="signIn">
+    <!--  -->
+    <p role="question" class="text-22 xlg-text-16 margin-top-2rem">
+      ليس لديك حساب ؟
+      <router-link class="text-red-light weight-bold" :to="{ name: 'SignUp' }">
+        انشاء حساب</router-link
+      >
+    </p>
+  </Form>
 </template>
 
 <script>
-import Form from "@/components/Form";
-//
 export default {
   name: "SignIn",
-  components: {
-    Form,
+  methods: {
+    signIn(data) {
+      console.log(data);
+    },
   },
 };
 </script>

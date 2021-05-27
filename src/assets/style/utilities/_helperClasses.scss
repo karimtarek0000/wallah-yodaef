@@ -76,8 +76,14 @@ input {
   all: unset;
   font-family: inherit;
 
+  //
   &::placeholder {
     opacity: 0.5;
+  }
+
+  //
+  &:focus {
+    border: 1px solid $red-light-1;
   }
 }
 
