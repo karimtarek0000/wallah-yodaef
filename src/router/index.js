@@ -18,24 +18,36 @@ const routes = [
         name: "Home",
         component: () =>
           import(/* webpackChunkName: "Home" */ "../views/Home.vue"),
+        meta: {
+          head: "الرئيسية",
+        },
       },
       {
         path: "/donation",
         name: "Donation",
         component: () =>
           import(/* webpackChunkName: "donation" */ "../views/Donation.vue"),
+        meta: {
+          head: "سجل التبرعات",
+        },
       },
       {
         path: "/wallet",
         name: "Wallet",
         component: () =>
           import(/* webpackChunkName: "wallet" */ "../views/Wallet.vue"),
+        meta: {
+          head: "المحفظة",
+        },
       },
       {
         path: "/my-account",
         name: "MyAccount",
         component: () =>
           import(/* webpackChunkName: "donation" */ "../views/MyAccount.vue"),
+        meta: {
+          head: "حسابي",
+        },
       },
       {
         path: "/more-info",
@@ -101,6 +113,11 @@ const routes = [
         },
       },
     ],
+  },
+  {
+    path: "*",
+    name: "404",
+    component: () => import(/* webpackChunkName: "404" */ "../views/404.vue"),
   },
 ];
 

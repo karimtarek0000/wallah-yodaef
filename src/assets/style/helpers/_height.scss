@@ -83,7 +83,7 @@
 ////////////////////////////
 // 3) - Max Height
 @each $heightSize in $chooseMaxHeight {
-  .min-height-#{$heightSize} {
+  .max-height-#{$heightSize} {
     @if type-of($heightSize) == "number" {
       max-height: #{$heightSize#{"%"}};
     } @else {

@@ -8,6 +8,7 @@ import GSvg from "./components/share/GSvg";
 import GImage from "./components/share/GImage";
 import BtnPrimary from "./components/share/BtnPrimary";
 import Form from "./components/Form";
+import GoBack from "./components/share/GoBack";
 //
 Vue.config.productionTip = false;
 //
@@ -17,6 +18,7 @@ Vue.component("GSvg", GSvg);
 Vue.component("GImage", GImage);
 Vue.component("BtnPrimary", BtnPrimary);
 Vue.component("Form", Form);
+Vue.component("GoBack", GoBack);
 
 //
 new Vue({

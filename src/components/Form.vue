@@ -22,13 +22,8 @@
         position-rel
       "
     >
-      <figure
-        @click="goBack"
-        class="d-flex align-items-center arrow-back position-abs cursor-pointer"
-      >
-        <GSvg class="svg-30 fill-black" nameIcon="angle-right" title="back" />
-        <span class="weight-bold text-20 text-black">عودة</span>
-      </figure>
+      <!--  -->
+      <GoBack class="arrow-back position-abs" />
       <!--  -->
       <figure role="logo" class="height-9rem margin-y-2rem">
         <img class="resize-img" src="/logo/logo-2.svg" alt="logo" />
@@ -498,10 +493,6 @@ export default {
         this.$emit("dataForm", code);
       }
     },
-    //
-    goBack() {
-      this.$router.go(-1);
-    },
   },
 };
 </script>
@@ -510,14 +501,5 @@ export default {
 //
 .register-icon {
   @include position("rt", $moveT: "50%", $moveR: "1.2rem");
-}
-
-//
-.arrow-back {
-  @include position("lt", $moveT: "36px", $moveL: "-7px");
-  //
-  @include BreakPoint(xlg) {
-    @include position("lt", $moveT: "36px", $moveL: "15px");
-  }
 }
 </style>

@@ -5,6 +5,7 @@ button {
   -o-appearance: none;
   appearance: none;
   border: none;
+  font-family: inherit;
 
   //
   &:hover,
@@ -51,9 +52,4 @@ a:visited {
   &:hover {
     text-decoration: none;
   }
-}
-
-//
-button {
-  font-family: inherit;
 }

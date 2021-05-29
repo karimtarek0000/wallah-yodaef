@@ -14,16 +14,7 @@
       <!-- Navbar Options -->
       <NavbarOptions />
       <!--  -->
-      <div
-        class="
-          bg-light-1
-          padding-1rem
-          margin-top-2rem
-          radius-card
-          overflow-auto
-          wrapper
-        "
-      >
+      <div class="bg-light-1 margin-top-2rem radius-card overflow-auto wrapper">
         <router-view />
       </div>
     </div>
@@ -48,14 +39,24 @@ export default {
 };
 </script>
 <style lang="scss">
+//
 .wrapper {
-  @include scrollBar(5px, $gray, $red-light);
-  max-height: 85vh;
-  min-height: 85vh;
-  //
+  min-height: calc(100vh - 110px);
+  max-height: calc(100vh - 110px);
+
+  @include BreakPoint(md) {
+    min-height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+  }
+
   @include BreakPoint(lg) {
-    max-height: calc(100vh - 19rem);
-    min-height: calc(100vh - 19rem);
+    min-height: calc(100vh - 150px);
+    max-height: calc(100vh - 150px);
+  }
+
+  @include BreakPoint(sm) {
+    min-height: calc(100vh - 130px);
+    max-height: calc(100vh - 130px);
   }
 }
 </style>

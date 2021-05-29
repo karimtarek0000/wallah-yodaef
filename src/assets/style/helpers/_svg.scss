@@ -49,6 +49,8 @@ $chooseFillSvg: null !default;
   // Render class with sizes svg
   .lg-svg-#{$name} {
     @include BreakPoint(lg) {
+      width: $size;
+      height: $size;
     }
   }
 }
