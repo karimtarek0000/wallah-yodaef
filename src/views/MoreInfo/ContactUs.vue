@@ -1,10 +1,10 @@
 <template>
-  <p>moreInfo</p>
+  <p>ContactUs</p>
 </template>
 
 <script>
 export default {
-  name: "MoreInfo",
+  name: "ContactUs",
 };
 </script>
 

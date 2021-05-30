@@ -35,13 +35,7 @@
     <!--  -->
     <BtnPrimary
       @submited="test"
-      class="
-        bg-red-light
-        flex-shrink-0
-        padding-x-2rem padding-y-1rem
-        text-light
-        radius-100
-      "
+      class="flex-shrink-0 padding-x-2rem padding-y-1rem"
       nameBtn="تبرع الان"
     />
   </div>

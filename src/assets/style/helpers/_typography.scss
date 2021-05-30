@@ -36,7 +36,7 @@
 @each $name, $size in map-get($font, sizes) {
   .text-#{$name} {
     font-size: $size;
-    line-height: #{$size * 1.6};
+    line-height: #{$size * 1.9};
   }
 }
 
@@ -47,7 +47,7 @@
   @include BreakPoint(xlg) {
     .xlg-text-#{$name} {
       font-size: $size;
-      line-height: #{$size * 1.6};
+      line-height: #{$size * 1.9};
     }
   }
 }
@@ -57,7 +57,7 @@
   @include BreakPoint(lg) {
     .lg-text-#{$name} {
       font-size: $size;
-      line-height: #{$size * 1.6};
+      line-height: #{$size * 1.9};
     }
   }
 }
@@ -67,7 +67,7 @@
   @include BreakPoint(md) {
     .md-text-#{$name} {
       font-size: $size;
-      line-height: #{$size * 1.6};
+      line-height: #{$size * 1.9};
     }
   }
 }
@@ -77,7 +77,7 @@
   @include BreakPoint(sm) {
     .sm-text-#{$name} {
       font-size: $size;
-      line-height: #{$size * 1.6};
+      line-height: #{$size * 1.9};
     }
   }
 }

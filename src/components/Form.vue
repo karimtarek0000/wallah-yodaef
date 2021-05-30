@@ -22,7 +22,7 @@
         position-rel
       "
     >
-      <!--  -->
+      <!-- Go Back -->
       <GoBack class="arrow-back position-abs" />
       <!--  -->
       <figure role="logo" class="height-9rem margin-y-2rem">
@@ -209,6 +209,7 @@
           />
           <!--  -->
           <figure
+            v-show="form.password"
             @click="visible1 = !visible1"
             role="icon-visible"
             class="register-icon position-abs"
@@ -281,6 +282,7 @@
           />
           <!--  -->
           <figure
+            v-show="form.confirmPassword"
             @click="visible2 = !visible2"
             role="icon-visible"
             class="register-icon position-abs"
@@ -374,17 +376,7 @@
       </router-link>
       <!-- Submit -->
       <BtnPrimary
-        class="
-          bg-red-light
-          btn__red-light
-          text-light
-          width-276px
-          padding-y-1rem
-          radius-100
-          text-18
-          lg-text-22
-          margin-top-2rem
-        "
+        class="width-276px padding-y-1rem text-18 lg-text-22 margin-top-2rem"
         type="submit"
         :nameBtn="nameBtn"
       />

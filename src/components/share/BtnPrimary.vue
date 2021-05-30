@@ -1,10 +1,11 @@
 <template>
   <button
-    class="btn"
+    class="btn bg-red-light text-light radius-100 btn__red-light"
     :type="type"
     role="button"
     @click.stop="$emit('submited')"
   >
+    <slot />
     {{ nameBtn }}
   </button>
 </template>

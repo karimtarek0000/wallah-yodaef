@@ -168,6 +168,7 @@ export default {
 <style lang="scss">
 //
 .model-donation {
+  z-index: 9999;
   //
   &__wrapper {
     @include position("centerX");

@@ -44,16 +44,76 @@ const routes = [
         path: "/my-account",
         name: "MyAccount",
         component: () =>
-          import(/* webpackChunkName: "donation" */ "../views/MyAccount.vue"),
-        meta: {
-          head: "حسابي",
-        },
+          import(
+            /* webpackChunkName: "account" */ "../views/MyAccount/MyAccount.vue"
+          ),
+        redirect: { name: "Account" },
+        children: [
+          {
+            path: "account",
+            name: "Account",
+            component: () =>
+              import(
+                /* webpackChunkName: "account" */ "../views/MyAccount/Account.vue"
+              ),
+            meta: {
+              head: "حسابي",
+            },
+          },
+          {
+            path: "change-account",
+            name: "ChangeAccount",
+            component: () =>
+              import(
+                /* webpackChunkName: "changeAccount" */ "../views/MyAccount/ChangeAccount.vue"
+              ),
+            meta: {
+              head: "تعديل حسابي",
+            },
+          },
+        ],
       },
       {
         path: "/more-info",
         name: "MoreInfo",
         component: () =>
-          import(/* webpackChunkName: "moreInfo" */ "../views/MoreInfo.vue"),
+          import(
+            /* webpackChunkName: "moreInfo" */ "../views/MoreInfo/MoreInfo.vue"
+          ),
+        meta: {
+          head: "المزيد",
+        },
+      },
+      {
+        path: "/about-site",
+        name: "AboutSite",
+        component: () =>
+          import(
+            /* webpackChunkName: "aboutSite" */ "../views/MoreInfo/AboutSite.vue"
+          ),
+        meta: {
+          head: "عن الموقع",
+        },
+      },
+      {
+        path: "/terms",
+        name: "Terms",
+        component: () =>
+          import(/* webpackChunkName: "terms" */ "../views/MoreInfo/Terms.vue"),
+        meta: {
+          head: "الشروط و الاحكام",
+        },
+      },
+      {
+        path: "/contact-us",
+        name: "ContactUs",
+        component: () =>
+          import(
+            /* webpackChunkName: "contactUs" */ "../views/MoreInfo/ContactUs.vue"
+          ),
+        meta: {
+          head: "تواصل معنا",
+        },
       },
     ],
   },

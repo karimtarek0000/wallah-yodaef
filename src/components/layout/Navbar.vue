@@ -28,7 +28,7 @@
           :class="[
             isExactActive && 'router-exact-active',
             isActive && 'router-active',
-            'cursor-pointer lg-flex-grow-1 lg-padding-x-2rem lg-padding-y-1rem xlg-padding-y-2rem xlg-padding-x-1rem text-gray text-16 weight-bold',
+            'cursor-pointer lg-flex-grow-1 lg-flex-shrink-1 lg-padding-x-2rem lg-padding-y-1rem xlg-padding-y-2rem xlg-padding-x-1rem text-gray text-16 weight-bold',
             !item.name &&
               'd-lg-flex lg-justify-content-center lg-align-items-center',
           ]"
@@ -40,7 +40,11 @@
             :title="item.name"
           />
 
-          <span v-if="item.name" class="d-block">{{ item.name }}</span>
+          <span
+            v-if="item.name"
+            :class="['d-block', { fix: item.name === 'سجل التبرعات' }]"
+            >{{ item.name }}</span
+          >
         </li>
       </routerLink>
     </ul>
@@ -130,6 +134,16 @@ export default {
   box-shadow: 0px -4px 5px #9292922e;
   @include BreakPoint(xlg) {
     box-shadow: -4px 0px 5px #9292922e;
+  }
+}
+
+//
+.fix {
+  @media (max-width: 320px) {
+    width: 50px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 }
 </style>

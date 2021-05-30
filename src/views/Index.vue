@@ -2,19 +2,30 @@
   <div
     class="
       home
+      height-100
       d-flex
-      lg-flex-direction-column lg-align-items-center
-      height-100vh
+      lg-flex-direction-column
+      test
+      lg-align-items-center
     "
   >
     <!-- Navbar -->
     <Navbar />
     <!-- Pages -->
-    <div class="padding-1rem width-100 overflow-hidden">
+    <div class="padding-1rem width-100 overflow-hidden height-100">
       <!-- Navbar Options -->
       <NavbarOptions />
       <!--  -->
-      <div class="bg-light-1 margin-top-2rem radius-card overflow-auto wrapper">
+      <div
+        class="
+          bg-light-1
+          margin-top-2rem
+          radius-card
+          overflow-auto
+          max-height-88
+          min-height-88
+        "
+      >
         <router-view />
       </div>
     </div>
@@ -38,25 +49,4 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-//
-.wrapper {
-  min-height: calc(100vh - 110px);
-  max-height: calc(100vh - 110px);
-
-  @include BreakPoint(md) {
-    min-height: calc(100vh - 100px);
-    max-height: calc(100vh - 100px);
-  }
-
-  @include BreakPoint(lg) {
-    min-height: calc(100vh - 150px);
-    max-height: calc(100vh - 150px);
-  }
-
-  @include BreakPoint(sm) {
-    min-height: calc(100vh - 130px);
-    max-height: calc(100vh - 130px);
-  }
-}
-</style>
+<style></style>

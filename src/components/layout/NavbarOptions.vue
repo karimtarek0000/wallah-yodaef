@@ -1,17 +1,19 @@
 <template>
   <div
     role="options"
-    class="
-      options
-      d-flex
-      align-items-center
-      justify-content-between
-      height-60px
-      xlg-height-90px
-    "
+    :class="[
+      'options d-flex align-items-center  height-60px xlg-height-90px',
+      {
+        'justify-content-center': $route.meta.head === 'المزيد',
+      },
+      {
+        'justify-content-between': $route.meta.head !== 'المزيد',
+      },
+    ]"
   >
     <!--  -->
-    <template v-if="$route.meta.head !== 'الرئيسية'">
+    <template v-if="renderEl">
+      <!--  -->
       <GoBack :showText="false" />
       <!--  -->
       <p role="head" class="text-22 text-black weight-bold margin-start-2rem">
@@ -32,6 +34,14 @@
 <script>
 export default {
   name: "NavbarOptions",
+  computed: {
+    renderEl() {
+      return (
+        this.$route.meta.head !== "الرئيسية" &&
+        this.$route.meta.head !== "المزيد"
+      );
+    },
+  },
 };
 </script>
 

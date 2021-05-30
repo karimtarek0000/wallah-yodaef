@@ -36,6 +36,7 @@ $font: (
     20: 2rem,
     22: 2.2rem,
     25: 2.5rem,
+    30: 3rem,
     40: 4rem,
     50: 5rem,
     120: 12rem,
@@ -117,13 +118,13 @@ $chooseHeight: "100vh", "90px", "60px", 100, "50vh", "50px", "20rem", "12rem",
 /// 7) - MIN HEIGHT
 // Choose min height will add classes
 // Ex => 60 = 60% other write "40px" "40rem" "40em" "40vh"
-$chooseMinHeight: "85vh", "100vh", "100vh";
+$chooseMinHeight: "85vh", "100vh", "100vh", 88;
 
 ////////////////////////////
 /// 8) - MAX HEIGHT
 // Choose max height will add classes
 // Ex => 60 = 60% other write "40px" "40rem" "40em" "40vh"
-$chooseMaxHeight: "85vh", "81vh", "100vh";
+$chooseMaxHeight: "85vh", "81vh", "100vh", 88;
 
 ////////////////////////////
 /// 9) - MAX WIDTH
@@ -137,7 +138,7 @@ $choosePosition: (
   rel: relative,
   abs: absolute,
   fix: fixed // ini: initial,
-  // sti: sticky,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  // sti: sticky,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 );
 
 ////////////////////////////

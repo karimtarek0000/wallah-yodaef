@@ -46,13 +46,10 @@
     <BtnPrimary
       @submited="test"
       class="
-        bg-red-light
         flex-shrink-0
         padding-x-2rem padding-y-1rem
-        text-light
         xlg-text-20
         lg-text-22
-        radius-100
         width-276px
         margin-top-2rem
       "

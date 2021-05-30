@@ -22,7 +22,7 @@
           "
         >
           <!-- Show image from api -->
-          <template v-if="type">
+          <template v-if="renderIf">
             <img ref="image" src="/img/test.jpg" class="resize-img" />
           </template>
           <!-- Show image when user selected image -->
@@ -32,7 +32,7 @@
         </figure>
         <!--  -->
         <label
-          v-if="type"
+          v-if="renderIf"
           for="file"
           class="
             d-flex
@@ -71,9 +71,10 @@ export default {
       type: String,
       required: false,
     },
-    type: {
-      type: Boolean,
-      default: false,
+  },
+  computed: {
+    renderIf() {
+      return this.$route.name === "ChangeAccount";
     },
   },
   methods: {
