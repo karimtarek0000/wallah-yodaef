@@ -19,6 +19,11 @@
   &-auto {
     overflow: auto;
   }
+
+  //
+  &-x {
+    overflow-x: hidden;
+  }
 }
 
 ////////////////////////////
@@ -60,6 +65,7 @@
   text-align: center;
 }
 
+//
 .border {
   //
   &-bottom {
@@ -126,10 +132,6 @@ input {
   }
 }
 
-button {
-  display: block;
-}
-
 //
 .trans-back {
   //
@@ -147,12 +149,19 @@ button {
   }
 }
 
+//
 .user-select {
   user-select: none;
 }
 
+//
 .shadow {
+  //
   &-upload {
     box-shadow: 0px 3px 6px #91919170;
+  }
+  //
+  &-all-notifi {
+    box-shadow: 3px 0px 10px lighten($gray, 20%);
   }
 }

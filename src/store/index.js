@@ -11,15 +11,24 @@ export default new Vuex.Store({
       title: null,
       nameBtn: null,
     },
+    toggleNotifi: false,
   },
   getters: {
+    getToggleNotifi(state) {
+      return state.toggleNotifi;
+    },
     getStatusModelDonation(state) {
       return state.statusModelDonation;
     },
   },
   mutations: {
+    //
     setStatusModelDonation(state, payload) {
       state.statusModelDonation = payload;
+    },
+    //
+    setToggleNotifi(state, payload) {
+      state.toggleNotifi = payload;
     },
   },
   modules: {},

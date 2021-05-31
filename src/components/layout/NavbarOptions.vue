@@ -11,6 +11,7 @@
       },
     ]"
   >
+    <Search v-show="$route.meta.head === 'الرئيسية'" />
     <!--  -->
     <template v-if="renderEl">
       <!--  -->
@@ -28,10 +29,15 @@
         alt="logo"
       />
     </router-link>
+    <!--  -->
+    <Notifi v-show="$route.meta.head === 'الرئيسية'" />
   </div>
 </template>
 
 <script>
+import Notifi from "@/components/Options/Notifi";
+import Search from "@/components/Options/Search";
+//
 export default {
   name: "NavbarOptions",
   computed: {
@@ -41,6 +47,10 @@ export default {
         this.$route.meta.head !== "المزيد"
       );
     },
+  },
+  components: {
+    Notifi,
+    Search,
   },
 };
 </script>

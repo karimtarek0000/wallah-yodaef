@@ -89,7 +89,7 @@
         nameIcon="exit"
         title="خروج"
       />
-      <span>تسجيل الدخول</span>
+      <span>تسجيل الخروج</span>
     </button>
   </section>
 </template>

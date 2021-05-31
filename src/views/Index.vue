@@ -24,9 +24,16 @@
           overflow-auto
           max-height-88
           min-height-88
+          position-rel
+          overflow-x
         "
       >
+        <!-- Pages -->
         <router-view />
+        <!-- Notification -->
+        <transition name="slideLeft">
+          <AllNotification v-if="getStatusToggleNotifi" />
+        </transition>
       </div>
     </div>
     <!-- Model  -->
@@ -39,13 +46,26 @@
 import Navbar from "@/components/layout/Navbar";
 import NavbarOptions from "@/components/layout/NavbarOptions";
 import Model from "@/components/Model";
+import AllNotification from "@/components/AllNotification";
+
 //
 export default {
   name: "Index",
+  data() {
+    return {
+      status: false,
+    };
+  },
+  computed: {
+    getStatusToggleNotifi() {
+      return this.$store.getters.getToggleNotifi;
+    },
+  },
   components: {
     Navbar,
     NavbarOptions,
     Model,
+    AllNotification,
   },
 };
 </script>

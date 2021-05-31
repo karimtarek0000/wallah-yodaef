@@ -23,10 +23,10 @@ $themes: (
 // 2) Font
 $font: (
   family: "Almarai",
-  weight: ":wght@300;400",
+  weight: ":wght@400;700",
   addWeight: (
-    normal: 300,
-    bold: 400,
+    normal: 400,
+    bold: 700,
   ),
   sizes: (
     14: 1.4rem,
@@ -74,6 +74,7 @@ $svg: (
   20: 2rem,
   30: 3rem,
   40: 4rem,
+  50: 5rem,
   80: 8rem,
 );
 
@@ -124,7 +125,7 @@ $chooseMinHeight: "85vh", "100vh", "100vh", 88;
 /// 8) - MAX HEIGHT
 // Choose max height will add classes
 // Ex => 60 = 60% other write "40px" "40rem" "40em" "40vh"
-$chooseMaxHeight: "85vh", "81vh", "100vh", 88;
+$chooseMaxHeight: "85vh", "81vh", "100vh", 88, 100;
 
 ////////////////////////////
 /// 9) - MAX WIDTH
@@ -138,7 +139,7 @@ $choosePosition: (
   rel: relative,
   abs: absolute,
   fix: fixed // ini: initial,
-  // sti: sticky,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  // sti: sticky,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 );
 
 ////////////////////////////
