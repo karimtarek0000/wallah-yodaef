@@ -378,9 +378,9 @@
       <BtnPrimary
         class="width-276px padding-y-1rem text-18 lg-text-22 margin-top-2rem"
         type="submit"
+        :disabled="statusDisabled"
         :nameBtn="nameBtn"
       />
-      <!-- Other any element if you want add ... -->
       <slot />
     </form>
   </section>
@@ -404,13 +404,14 @@ export default {
   },
   data() {
     return {
+      statusDisabled: false,
       visible1: false,
       visible2: false,
       form: {
-        name: null,
-        phone: null,
-        password: null,
-        confirmPassword: null,
+        name: "osama",
+        phone: "01277388237",
+        password: "9999999999",
+        confirmPassword: "9999999999",
         code: null,
       },
     };
@@ -455,11 +456,13 @@ export default {
         this.nameRender === "signUp"
       ) {
         //
+        this.statusDisabled = true;
+        //
         this.$emit("dataForm", {
           name,
           phone,
           password,
-          confirmPassword,
+          confirm_password: confirmPassword,
         });
       }
 
@@ -469,6 +472,9 @@ export default {
         !this.$v.form.password.$invalid &&
         this.nameRender === "signIn"
       ) {
+        //
+        this.statusDisabled = true;
+        //
         this.$emit("dataForm", {
           phone,
           password,
@@ -477,11 +483,17 @@ export default {
 
       // Only forget password
       if (!this.$v.form.phone.$invalid && this.nameRender === "forget") {
+        //
+        this.statusDisabled = true;
+        //
         this.$emit("dataForm", phone);
       }
 
       // Only password recovery
       if (!this.$v.form.code.$invalid) {
+        //
+        this.statusDisabled = true;
+        //
         this.$emit("dataForm", code);
       }
     },

@@ -10,6 +10,8 @@ import BtnPrimary from "./components/share/BtnPrimary";
 import Form from "./components/Form";
 import GoBack from "./components/share/GoBack";
 //
+import "./server/base.js";
+//
 Vue.config.productionTip = false;
 //
 Vue.use(Vuelidate);

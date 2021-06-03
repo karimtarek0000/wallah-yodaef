@@ -16,7 +16,7 @@ export default {
   name: "SignIn",
   methods: {
     signIn(data) {
-      console.log(data);
+      this.$store.dispatch("signIn", data);
     },
   },
 };

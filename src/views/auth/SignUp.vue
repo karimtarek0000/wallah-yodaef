@@ -16,7 +16,7 @@ export default {
   name: "SignUp",
   methods: {
     signUp(data) {
-      console.log(data);
+      this.$store.dispatch("register", data);
     },
   },
 };
