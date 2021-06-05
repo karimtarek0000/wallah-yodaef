@@ -380,7 +380,19 @@
         type="submit"
         :disabled="statusDisabled"
         :nameBtn="nameBtn"
-      />
+      >
+        <span
+          v-show="statusAlert"
+          class="
+            d-block
+            width-3rem
+            height-3rem
+            radius-circle
+            border-loading
+            margin-end-1rem
+          "
+        ></span>
+      </BtnPrimary>
       <slot />
     </form>
   </section>
@@ -401,17 +413,24 @@ export default {
       type: String,
       required,
     },
+    statusDisabled: {
+      type: Boolean,
+      default: false,
+    },
+    statusAlert: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      statusDisabled: false,
       visible1: false,
       visible2: false,
       form: {
-        name: "osama",
-        phone: "01277388237",
-        password: "9999999999",
-        confirmPassword: "9999999999",
+        name: null,
+        phone: null,
+        password: null,
+        confirmPassword: null,
         code: null,
       },
     };
@@ -456,8 +475,6 @@ export default {
         this.nameRender === "signUp"
       ) {
         //
-        this.statusDisabled = true;
-        //
         this.$emit("dataForm", {
           name,
           phone,
@@ -473,8 +490,6 @@ export default {
         this.nameRender === "signIn"
       ) {
         //
-        this.statusDisabled = true;
-        //
         this.$emit("dataForm", {
           phone,
           password,
@@ -484,15 +499,11 @@ export default {
       // Only forget password
       if (!this.$v.form.phone.$invalid && this.nameRender === "forget") {
         //
-        this.statusDisabled = true;
-        //
         this.$emit("dataForm", phone);
       }
 
       // Only password recovery
       if (!this.$v.form.code.$invalid) {
-        //
-        this.statusDisabled = true;
         //
         this.$emit("dataForm", code);
       }

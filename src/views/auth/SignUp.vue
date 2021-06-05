@@ -1,5 +1,10 @@
 <template>
-  <Form nameBtn="انشاء حساب" @dataForm="signUp">
+  <Form
+    nameBtn="انشاء حساب"
+    @dataForm="signUp"
+    :statusDisabled="statusDisabled"
+    :statusAlert="statusAlert"
+  >
     <!--  -->
     <p role="qustion" class="text-22 xlg-text-16 margin-top-2rem">
       هل لديك حساب ؟
@@ -14,9 +19,25 @@
 <script>
 export default {
   name: "SignUp",
+  data() {
+    return {
+      statusDisabled: false,
+      statusAlert: false,
+    };
+  },
   methods: {
     signUp(data) {
-      this.$store.dispatch("register", data);
+      //
+      this.statusDisabled = true;
+      this.statusAlert = true;
+      //
+      this.$store
+        .dispatch("register", data)
+        .then(() => (this.statusAlert = false))
+        .catch(() => {
+          this.statusDisabled = false;
+          this.statusAlert = false;
+        });
     },
   },
 };

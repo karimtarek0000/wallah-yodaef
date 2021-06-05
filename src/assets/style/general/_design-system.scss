@@ -105,15 +105,15 @@ $flexBasis: 20, 32, 49, 50, 80, 100, "90px";
 /// 5) - WIDTH
 // Choose width will add classes
 // Ex => 60 = 60% other write "40px" "40rem" "40em" "40vw"
-$chooseWidth: "90px", 100, 50, 30, 70, 90, 60, "20rem", "276px", "15rem", "50vw",
-  "13rem", "40rem", "5rem";
+$chooseWidth: "90px", 100, 50, 30, 70, 90, 60, "3rem", "20rem", "276px", "15rem",
+  "50vw", "13rem", "40rem", "5rem";
 
 ////////////////////////////
 /// 6) - HEIGHT
 // Choose height will add classes
 // Ex => 60 = 60% other write "40px" "40rem" "40em" "40vh"
-$chooseHeight: "100vh", "90px", "60px", 100, "50vh", "50px", "20rem", "12rem",
-  "15rem", "13rem", "30vh", "5rem", "9rem";
+$chooseHeight: "100vh", "90px", "60px", "3rem", 100, "50vh", "50px", "20rem",
+  "12rem", "15rem", "13rem", "30vh", "5rem", "9rem";
 
 ////////////////////////////
 /// 7) - MIN HEIGHT
@@ -139,7 +139,7 @@ $choosePosition: (
   rel: relative,
   abs: absolute,
   fix: fixed // ini: initial,
-  // sti: sticky,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  // sti: sticky,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 );
 
 ////////////////////////////

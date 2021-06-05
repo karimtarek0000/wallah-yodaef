@@ -1,6 +1,15 @@
 <template>
   <button
-    class="btn bg-red-light text-light radius-100 btn__red-light"
+    class="
+      d-flex
+      justify-content-center
+      align-items-center
+      btn
+      bg-red-light
+      text-light
+      radius-100
+      btn__red-light
+    "
     :type="type"
     role="button"
     @click.stop="$emit('submited')"

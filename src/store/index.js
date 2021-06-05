@@ -13,6 +13,10 @@ export default new Vuex.Store({
       nameBtn: null,
     },
     toggleNotifi: false,
+    alert: {
+      status: false,
+      text: null,
+    },
   },
   getters: {
     getToggleNotifi(state) {
@@ -20,6 +24,9 @@ export default new Vuex.Store({
     },
     getStatusModelDonation(state) {
       return state.statusModelDonation;
+    },
+    getAlert(state) {
+      return state.alert;
     },
   },
   mutations: {
@@ -31,36 +38,31 @@ export default new Vuex.Store({
     setToggleNotifi(state, payload) {
       state.toggleNotifi = payload;
     },
+    setAlert(state, payload) {
+      state.alert = payload;
+    },
   },
   actions: {
     //
-    // async register(context, payload) {
-    //   try {
-    //     const data = await axios.post(
-    //       "https://cors-anywhere.herokuapp.com/http://www.donates.algalya.com/api/register",
-    //       payload
-    //     );
-    //     //
-    //     console.log(data);
-    //   } catch (err) {
-    //     //
-    //     console.log(err.response.data.error);
-    //   }
-    // },
-    //
-    register(context, payload) {
-      axios
-        .post("/register", payload, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err);
+    async register({ commit }, payload) {
+      try {
+        const data = await axios.post("/register", payload);
+        //
+        commit("setAlert", {
+          status: true,
+          text: "تم التسجيل بنجاح",
         });
+        //
+        return Promise.resolve(data);
+      } catch (err) {
+        //
+        commit("setAlert", {
+          status: true,
+          text: err.response.data.error.replace(".", ""),
+        });
+        //
+        return Promise.reject(err);
+      }
     },
     //
     signIn(context, payload) {
@@ -69,8 +71,8 @@ export default new Vuex.Store({
         .then((data) => {
           console.log(data);
         })
-        .catch((error) => {
-          console.log(JSON.stringify(error));
+        .catch((err) => {
+          console.log(err.response.data.error.replace(".", ""));
         });
     },
   },

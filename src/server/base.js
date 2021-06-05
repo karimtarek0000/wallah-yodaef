@@ -1,12 +1,18 @@
 import axios from "axios";
 
+let BASE_URL = null;
+
+if (process.env.NODE_ENV === "development") {
+  BASE_URL = "http://localhost:8080/api";
+} else {
+  BASE_URL = "http://www.donates.algalya.com/api";
+}
+
 // BASE_URL
-axios.defaults.baseURL = "http://localhost:8080/api";
-// axios.defaults.baseURL =
-//   "https://cors-anywhere.herokuapp.com/http://www.donates.algalya.com/api";
+axios.defaults.baseURL = BASE_URL;
 
 // HEADERS
-// axios.defaults.headers.common["Accept-Language"] = "ar";
+axios.defaults.headers.common["Accept-Language"] = "ar";
 
 // INTERCEPTORS
 // axios.interceptors.response.use(
