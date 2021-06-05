@@ -10,6 +10,8 @@
 
 <script>
 //
+import * as Type from "@/store/Type.js";
+//
 export default {
   name: "Notifi",
   data() {
@@ -19,8 +21,8 @@ export default {
   },
   methods: {
     toggleNotifi() {
-      this.status = !this.$store.getters.getToggleNotifi;
-      this.$store.commit("setToggleNotifi", this.status);
+      this.status = !this.$store.getters[Type.GET_TOGGLE_NOTIFI];
+      this.$store.commit(Type.SET_TOGGLE_NOTIFI, this.status);
     },
   },
 };

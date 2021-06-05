@@ -390,6 +390,7 @@
             radius-circle
             border-loading
             margin-end-1rem
+            loading
           "
         ></span>
       </BtnPrimary>
@@ -516,5 +517,20 @@ export default {
 //
 .register-icon {
   @include position("rt", $moveT: "50%", $moveR: "1.2rem");
+}
+
+//
+.loading {
+  animation: circle 0.5s linear forwards;
+}
+
+//
+@keyframes circle {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

@@ -1,10 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import * as Type from "./Type.js";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  namespace: true,
   state: {
     statusModelDonation: {
       status: false,
@@ -19,36 +21,40 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    getToggleNotifi(state) {
+    //
+    [Type.GET_TOGGLE_NOTIFI](state) {
       return state.toggleNotifi;
     },
-    getStatusModelDonation(state) {
+    //
+    [Type.GET_STATUS_MODEL_DONATION](state) {
       return state.statusModelDonation;
     },
-    getAlert(state) {
+    //
+    [Type.GET_ALERT](state) {
       return state.alert;
     },
   },
   mutations: {
     //
-    setStatusModelDonation(state, payload) {
+    [Type.SET_STATUS_MODEL_DONATION](state, payload) {
       state.statusModelDonation = payload;
     },
     //
-    setToggleNotifi(state, payload) {
+    [Type.SET_TOGGLE_NOTIFI](state, payload) {
       state.toggleNotifi = payload;
     },
-    setAlert(state, payload) {
+    //
+    [Type.SET_ALERT](state, payload) {
       state.alert = payload;
     },
   },
   actions: {
     //
-    async register({ commit }, payload) {
+    async [Type.REGISTER]({ commit }, payload) {
       try {
         const data = await axios.post("/register", payload);
         //
-        commit("setAlert", {
+        commit(Type.SET_ALERT, {
           status: true,
           text: "تم التسجيل بنجاح",
         });
@@ -56,7 +62,7 @@ export default new Vuex.Store({
         return Promise.resolve(data);
       } catch (err) {
         //
-        commit("setAlert", {
+        commit(Type.SET_ALERT, {
           status: true,
           text: err.response.data.error.replace(".", ""),
         });
@@ -65,7 +71,7 @@ export default new Vuex.Store({
       }
     },
     //
-    signIn(context, payload) {
+    [Type.SIGN_IN](context, payload) {
       return axios
         .post("/login", payload)
         .then((data) => {

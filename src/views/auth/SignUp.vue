@@ -2,8 +2,7 @@
   <Form
     nameBtn="انشاء حساب"
     @dataForm="signUp"
-    :statusDisabled="statusDisabled"
-    :statusAlert="statusAlert"
+    v-bind="{ statusDisabled, statusAlert }"
   >
     <!--  -->
     <p role="qustion" class="text-22 xlg-text-16 margin-top-2rem">
@@ -17,6 +16,9 @@
 </template>
 
 <script>
+//
+import * as Type from "@/store/Type.js";
+//
 export default {
   name: "SignUp",
   data() {
@@ -32,7 +34,7 @@ export default {
       this.statusAlert = true;
       //
       this.$store
-        .dispatch("register", data)
+        .dispatch(Type.REGISTER, data)
         .then(() => (this.statusAlert = false))
         .catch(() => {
           this.statusDisabled = false;

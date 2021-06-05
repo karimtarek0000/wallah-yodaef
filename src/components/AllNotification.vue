@@ -19,6 +19,7 @@
 <script>
 //
 import CardNotification from "@/components/CardNotification";
+import * as Type from "@/store/Type.js";
 //
 export default {
   name: "AllNotification",
@@ -27,7 +28,7 @@ export default {
   },
   methods: {
     closeNotifi() {
-      this.$store.commit("setToggleNotifi", false);
+      this.$store.commit(Type.SET_TOGGLE_NOTIFI, false);
     },
   },
   mounted() {

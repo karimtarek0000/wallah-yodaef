@@ -34,7 +34,7 @@
     </div>
     <!--  -->
     <BtnPrimary
-      @submited="test"
+      @submited="openModel"
       class="flex-shrink-0 padding-x-2rem padding-y-1rem"
       nameBtn="تبرع الان"
     />
@@ -43,11 +43,13 @@
 
 <script>
 //
+import * as Type from "@/store/Type.js";
+//
 export default {
   name: "CardDonation",
   methods: {
-    test() {
-      this.$store.commit("setStatusModelDonation", {
+    openModel() {
+      this.$store.commit(Type.SET_STATUS_MODEL_DONATION, {
         status: true,
         icon: "balance",
         title: "أدخل المبلغ الذي تريد التبرع به",

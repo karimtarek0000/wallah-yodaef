@@ -44,7 +44,7 @@
     <!--  -->
     <!--  -->
     <BtnPrimary
-      @submited="test"
+      @submited="openModel"
       class="
         flex-shrink-0
         padding-x-2rem padding-y-1rem
@@ -59,11 +59,14 @@
 </template>
 
 <script>
+//
+import * as Type from "@/store/Type.js";
+//
 export default {
   name: "Wallet",
   methods: {
-    test() {
-      this.$store.commit("setStatusModelDonation", {
+    openModel() {
+      this.$store.commit(Type.SET_STATUS_MODEL_DONATION, {
         status: true,
         icon: "hand",
         title: "أدخل المبلغ الذي تريد شحنه في المحفظة",

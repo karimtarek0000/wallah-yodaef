@@ -35,8 +35,4 @@ export default {
 };
 </script>
 
-<style>
-.btn {
-  /* all: unset; */
-}
-</style>
+<style></style>

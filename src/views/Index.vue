@@ -47,6 +47,7 @@ import Navbar from "@/components/layout/Navbar";
 import NavbarOptions from "@/components/layout/NavbarOptions";
 import Model from "@/components/Model";
 import AllNotification from "@/components/AllNotification";
+import * as Type from "@/store/Type.js";
 
 //
 export default {
@@ -58,7 +59,7 @@ export default {
   },
   computed: {
     getStatusToggleNotifi() {
-      return this.$store.getters.getToggleNotifi;
+      return this.$store.getters[Type.GET_TOGGLE_NOTIFI];
     },
   },
   components: {

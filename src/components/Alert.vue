@@ -19,18 +19,21 @@
 </template>
 
 <script>
+//
+import * as Type from "@/store/Type.js";
+//
 export default {
   name: "Alert",
   computed: {
     getInfoAlert() {
-      return this.$store.getters.getAlert;
+      return this.$store.getters[Type.GET_ALERT];
     },
   },
   watch: {
     "getInfoAlert.status"(value) {
       if (value) {
         setTimeout(() => {
-          this.$store.commit("setAlert", {
+          this.$store.commit(Type.SET_ALERT, {
             status: false,
             text: null,
           });
@@ -46,6 +49,7 @@ export default {
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 9999;
 }
 
 .alert-enter-active {

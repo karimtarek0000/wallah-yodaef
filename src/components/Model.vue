@@ -115,6 +115,9 @@
 </template>
 
 <script>
+//
+import * as Type from "@/store/Type.js";
+//
 export default {
   name: "ModelDonation",
   data() {
@@ -127,7 +130,7 @@ export default {
     close() {
       this.amount = null;
       this.$store.commit(
-        "setStatusModelDonation",
+        Type.SET_STATUS_MODEL_DONATION,
         Object.assign(this.statusModel, { status: false })
       );
     },
@@ -142,7 +145,7 @@ export default {
   computed: {
     //
     statusModel() {
-      return this.$store.getters.getStatusModelDonation;
+      return this.$store.getters[Type.GET_STATUS_MODEL_DONATION];
     },
   },
   watch: {
