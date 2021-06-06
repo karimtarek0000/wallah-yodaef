@@ -50,15 +50,11 @@ export default new Vuex.Store({
     },
     //
     [Type.SET_USER_DATA](state, payload) {
+      const { id, name, token } = payload;
       //
-      const { id, name, phone, token } = payload;
+      state.dataUser = payload;
       //
-      state.dataUser = { id, name, phone };
-      //
-      localStorage.setItem(
-        "tokenUser",
-        JSON.stringify({ token, id, name, phone })
-      );
+      localStorage.setItem("tokenUser", JSON.stringify({ token, id, name }));
     },
   },
   actions: {
@@ -94,7 +90,7 @@ export default new Vuex.Store({
         });
 
         //
-        const { id, name, phone, token } = data;
+        const { id, name, token } = data;
 
         //
         commit(Type.SET_ALERT, {
@@ -103,7 +99,7 @@ export default new Vuex.Store({
         });
 
         //
-        commit(Type.SET_USER_DATA, { id, name, phone, token });
+        commit(Type.SET_USER_DATA, { id, name, token });
 
         //
         return Promise.resolve(true);
