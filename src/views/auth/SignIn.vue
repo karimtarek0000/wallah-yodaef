@@ -36,7 +36,13 @@ export default {
       //
       this.$store
         .dispatch(Type.SIGN_IN, data)
-        .then(() => (this.statusAlert = false))
+        .then(() => {
+          this.statusAlert = false;
+          //
+          setTimeout(() => {
+            this.$router.push({ name: "Home" });
+          }, 700);
+        })
         .catch(() => {
           this.statusDisabled = false;
           this.statusAlert = false;

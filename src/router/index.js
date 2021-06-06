@@ -197,6 +197,8 @@ const router = new VueRouter({
   routes,
 });
 
+///////////////////////////////////////////////
+// Router Authorization
 router.beforeEach((to, from, next) => {
   //
   const token = localStorage.getItem("tokenUser");

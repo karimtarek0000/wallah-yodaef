@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import Vuelidate from "vuelidate";
+import * as Type from "./store/Type.js";
 //
 import GSvg from "./components/share/GSvg";
 import GImage from "./components/share/GImage";
@@ -26,5 +27,14 @@ Vue.component("GoBack", GoBack);
 new Vue({
   router,
   store,
+  // When user reload page or visit site again will auto login
+  created() {
+    //
+    const USER = JSON.parse(localStorage.getItem("tokenUser"));
+    //
+    if (USER) {
+      this.$store.commit(Type.SET_DATA_USER, USER);
+    }
+  },
   render: (h) => h(App),
 }).$mount("#app");

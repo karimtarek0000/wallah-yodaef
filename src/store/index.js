@@ -48,15 +48,17 @@ export default new Vuex.Store({
     [Type.SET_ALERT](state, payload) {
       state.alert = payload;
     },
+    //
     [Type.SET_DATA_USER](state, payload) {
       //
-      const { id, name: userName, phone, token } = payload;
+      const { id, name, phone, token } = payload;
       //
-      state.dataUser = { id, userName, phone };
+      state.dataUser = { id, name, phone };
       //
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      //
-      localStorage.setItem("tokenUser", token);
+      localStorage.setItem(
+        "tokenUser",
+        JSON.stringify({ token, id, name, phone })
+      );
     },
   },
   actions: {
