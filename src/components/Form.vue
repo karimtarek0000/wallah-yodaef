@@ -447,7 +447,7 @@ export default {
       },
       password: {
         required,
-        minLength: minLength(10),
+        minLength: minLength(5),
       },
       confirmPassword: {
         samePassword: sameAs("password"),

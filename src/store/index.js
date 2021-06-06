@@ -19,6 +19,7 @@ export default new Vuex.Store({
       status: false,
       text: null,
     },
+    dataUser: null,
   },
   getters: {
     //
@@ -47,6 +48,16 @@ export default new Vuex.Store({
     [Type.SET_ALERT](state, payload) {
       state.alert = payload;
     },
+    [Type.SET_DATA_USER](state, payload) {
+      //
+      const { id, name: userName, phone, token } = payload;
+      //
+      state.dataUser = { id, userName, phone };
+      //
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      //
+      localStorage.setItem("tokenUser", token);
+    },
   },
   actions: {
     //
@@ -71,14 +82,34 @@ export default new Vuex.Store({
       }
     },
     //
-    [Type.SIGN_IN](context, payload) {
+    [Type.SIGN_IN]({ commit }, payload) {
       return axios
-        .post("/login", payload)
-        .then((data) => {
-          console.log(data);
+        .post("/login", {
+          ...payload,
+          fcm_token:
+            "fdMVmHPiNyE:APA91bGMFftB8ZkeFuV4DTwig046JkvvwIbn1tFKxZx4CGO516Z7jqAqrvTOwcBwLQ9_paSUCLV6z0p-EOoM9xj2EleckAXOnHHQ8Vn8xikniFXFExD92NrjN2mLY-alKBD5p7DG5hS1",
+        })
+        .then(({ data }) => {
+          //
+          const { id, name, phone, token } = data;
+          //
+          commit(Type.SET_ALERT, {
+            status: true,
+            text: "تم تسجيل الدخول",
+          });
+          //
+          commit(Type.SET_DATA_USER, { id, name, phone, token });
+          //
+          return Promise.resolve(true);
         })
         .catch((err) => {
-          console.log(err.response.data.error.replace(".", ""));
+          //
+          commit(Type.SET_ALERT, {
+            status: true,
+            text: err.response.data.error.replace(".", ""),
+          });
+          //
+          return Promise.reject(err);
         });
     },
   },

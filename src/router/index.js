@@ -117,6 +117,7 @@ const routes = [
       },
     ],
   },
+  //
   {
     path: "/auth",
     name: "Auth",
@@ -136,6 +137,7 @@ const routes = [
         meta: {
           title: "تسجيل الدخول",
           head: "تسجيل الدخول",
+          auth: true,
         },
       },
       {
@@ -146,6 +148,7 @@ const routes = [
         meta: {
           title: "تسجيل جديد",
           head: "انشاء حساب جديد",
+          auth: true,
         },
       },
       {
@@ -158,6 +161,7 @@ const routes = [
         meta: {
           title: "نسيت كلمة السر",
           head: "هل نسيت كلمة السر ؟",
+          auth: true,
         },
       },
       {
@@ -170,10 +174,15 @@ const routes = [
         meta: {
           title: "نسيت كلمة السر",
           head: "هل نسيت كلمة السر ؟",
+          auth: true,
         },
       },
     ],
+    meta: {
+      auth: true,
+    },
   },
+  //
   {
     path: "*",
     name: "404",
@@ -186,6 +195,23 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  //
+  const token = localStorage.getItem("tokenUser");
+  //
+  if (to.matched.some((page) => page.meta.auth) && token) {
+    next({ name: "Home" });
+  } else {
+    next();
+  }
+  //
+  if (!to.matched.some((page) => page.meta.auth) && !token) {
+    next({ name: "Register" });
+  } else {
+    next();
+  }
 });
 
 //

@@ -34,7 +34,13 @@ export default {
       this.statusDisabled = true;
       this.statusAlert = true;
       //
-      this.$store.dispatch(Type.SIGN_IN, data);
+      this.$store
+        .dispatch(Type.SIGN_IN, data)
+        .then(() => (this.statusAlert = false))
+        .catch(() => {
+          this.statusDisabled = false;
+          this.statusAlert = false;
+        });
     },
   },
 };
