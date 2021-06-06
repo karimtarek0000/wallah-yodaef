@@ -27,7 +27,7 @@ Vue.component("GoBack", GoBack);
 new Vue({
   router,
   store,
-  // When user reload page or visit site again will auto login
+  // if user reload page or visit site again will auto login
   created() {
     //
     const USER = JSON.parse(localStorage.getItem("tokenUser"));
