@@ -33,7 +33,7 @@ new Vue({
     const USER = JSON.parse(localStorage.getItem("tokenUser"));
     //
     if (USER) {
-      this.$store.commit(Type.SET_DATA_USER, USER);
+      this.$store.commit(Type.SET_USER_DATA, USER);
     }
   },
   render: (h) => h(App),

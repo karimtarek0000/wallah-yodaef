@@ -49,7 +49,7 @@ export default new Vuex.Store({
       state.alert = payload;
     },
     //
-    [Type.SET_DATA_USER](state, payload) {
+    [Type.SET_USER_DATA](state, payload) {
       //
       const { id, name, phone, token } = payload;
       //
@@ -84,35 +84,39 @@ export default new Vuex.Store({
       }
     },
     //
-    [Type.SIGN_IN]({ commit }, payload) {
-      return axios
-        .post("/login", {
+    async [Type.SIGN_IN]({ commit }, payload) {
+      try {
+        //
+        const { data } = await axios.post("/login", {
           ...payload,
           fcm_token:
             "fdMVmHPiNyE:APA91bGMFftB8ZkeFuV4DTwig046JkvvwIbn1tFKxZx4CGO516Z7jqAqrvTOwcBwLQ9_paSUCLV6z0p-EOoM9xj2EleckAXOnHHQ8Vn8xikniFXFExD92NrjN2mLY-alKBD5p7DG5hS1",
-        })
-        .then(({ data }) => {
-          //
-          const { id, name, phone, token } = data;
-          //
-          commit(Type.SET_ALERT, {
-            status: true,
-            text: "تم تسجيل الدخول",
-          });
-          //
-          commit(Type.SET_DATA_USER, { id, name, phone, token });
-          //
-          return Promise.resolve(true);
-        })
-        .catch((err) => {
-          //
-          commit(Type.SET_ALERT, {
-            status: true,
-            text: err.response.data.error.replace(".", ""),
-          });
-          //
-          return Promise.reject(err);
         });
+
+        //
+        const { id, name, phone, token } = data;
+
+        //
+        commit(Type.SET_ALERT, {
+          status: true,
+          text: "تم تسجيل الدخول",
+        });
+
+        //
+        commit(Type.SET_USER_DATA, { id, name, phone, token });
+
+        //
+        return Promise.resolve(true);
+      } catch (err) {
+        //
+        commit(Type.SET_ALERT, {
+          status: true,
+          text: err.response.data.error.replace(".", ""),
+        });
+
+        //
+        return Promise.reject(err);
+      }
     },
   },
 });
