@@ -197,24 +197,5 @@ const router = new VueRouter({
   routes,
 });
 
-///////////////////////////////////////////////
-// Router Authorization
-router.beforeEach((to, from, next) => {
-  //
-  const token = localStorage.getItem("tokenUser");
-  //
-  if (to.matched.some((page) => page.meta.auth) && token) {
-    next({ name: "Home" });
-  } else {
-    next();
-  }
-  //
-  if (!to.matched.some((page) => page.meta.auth) && !token) {
-    next({ name: "Register" });
-  } else {
-    next();
-  }
-});
-
 //
 export default router;

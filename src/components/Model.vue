@@ -206,6 +206,7 @@ export default {
 .slideUp-enter-active {
   animation: slideUp 0.8s cubic-bezier(0.01, 0.44, 0.48, 1.01) forwards;
   will-change: animation;
+  backface-visibility: hidden;
 }
 
 //

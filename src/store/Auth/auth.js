@@ -28,6 +28,7 @@ const mutations = {
   },
 };
 
+//
 const actions = {
   //
   async [Type.REGISTER]({ commit }, payload) {
@@ -63,7 +64,8 @@ const actions = {
       //
       const { id, name, token } = data;
       const createdAt = new Date().getTime();
-
+      //
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       //
       commit(Type.SET_ALERT, {
         status: true,

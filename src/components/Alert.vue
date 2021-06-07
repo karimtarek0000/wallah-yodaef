@@ -59,6 +59,7 @@ export default {
 .alert-enter-active,
 .alert-leave-active {
   will-change: animation;
+  backface-visibility: hidden;
 }
 
 @keyframes alertSlideIn {

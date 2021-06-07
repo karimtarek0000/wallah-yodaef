@@ -15,21 +15,25 @@
         alt="logo"
       />
     </figure>
-    <p role="description" class="text-20 padding-x-2rem weight-bold">
-      هنالك العديد من الأنواع المتوفرة لنصوص لوريم إيبسوم، ولكن الغالبية تم
-      تعديلها بشكل ما عبر إدخال بعض النوادر أو الكلمات العشوائية إلى النص. إن
-      كنت تريد أن تستخدم نص لوريم إيبسوم ما، عليك أن تتحقق أولاً أن ليس هناك أي
-      كلمات أو عبارات محرجة أو غير لائقة مخبأة في هذا النص. بينما تعمل جميع
-      مولّدات نصوص لوريم إيبسوم على الإنترنت على إعادة تكرار مقاطع من نص لوريم
-      إيبسوم نفسه عدة مرات بما تتطلبه الحاجة هنالك العديد من الأنواع المتوفرة
-      لنصوص لوريم إيبسوم، ولكن الغالبية تم تعديلها بشكل
-    </p>
+    <p
+      role="description"
+      class="text-20 padding-x-2rem weight-bold text-align-center"
+      v-text="getPar"
+    />
   </section>
 </template>
 
 <script>
 export default {
   name: "Terms",
+  computed: {
+    getPar() {
+      return this.$store.getters[this.$Type.GET_TERMS];
+    },
+  },
+  created() {
+    this.$store.dispatch(this.$Type.TERMS);
+  },
 };
 </script>
 

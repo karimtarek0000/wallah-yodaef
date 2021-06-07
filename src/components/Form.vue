@@ -3,7 +3,6 @@
     role="register"
     class="
       register
-      min-height-100vh
       d-flex
       lg-flex-direction-column
       justify-content-center
@@ -66,8 +65,11 @@
         d-flex
         flex-direction-column
         align-items-center
+        min-height-100vh
+        max-height-100vh
+        overflow-auto
         xlg-justify-content-center xlg-basis-50
-        lg-height-100vh lg-padding-top-2rem
+        padding-top-2rem
       "
     >
       <!-- Name -->

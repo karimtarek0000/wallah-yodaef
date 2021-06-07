@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import * as Type from "./Type.js";
 import Auth from "./Auth/auth.js";
+import Pages from "./Pages/pages.js";
 
 Vue.use(Vuex);
 
@@ -66,5 +67,6 @@ export default new Vuex.Store({
   },
   modules: {
     Auth,
+    Pages,
   },
 });

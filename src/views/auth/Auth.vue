@@ -1,5 +1,5 @@
 <template>
-  <div class="position-rel">
+  <div class="position-rel height-100 overflow-auto">
     <Alert />
     <!--  -->
     <router-view :key="$route.path" />

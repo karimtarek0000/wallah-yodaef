@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import Vuelidate from "vuelidate";
+import axios from "axios";
 import * as Type from "./store/Type.js";
 //
 import GSvg from "./components/share/GSvg";
@@ -19,11 +20,26 @@ Vue.prototype.$Type = Type;
 //
 Vue.use(Vuelidate);
 //
-Vue.component("GSvg", GSvg);
-Vue.component("GImage", GImage);
-Vue.component("BtnPrimary", BtnPrimary);
-Vue.component("Form", Form);
-Vue.component("GoBack", GoBack);
+const compo = [GSvg, GImage, BtnPrimary, Form, GoBack];
+//
+compo.forEach((co) => Vue.component(co.name, co));
+
+///////////////////////////////////////////////
+// Router Authorization
+router.beforeEach((to, from, next) => {
+  //
+  const token = localStorage.getItem("tokenUser");
+  const exsistAuth = to.matched.some((page) => page.meta.auth);
+  //
+  if (exsistAuth && token) next({ name: "Home" });
+  //
+  if (!exsistAuth && !token) {
+    next({ name: "Register" });
+    store.dispatch(Type.SIGN_OUT);
+  }
+
+  next();
+});
 
 //
 new Vue({
@@ -34,9 +50,16 @@ new Vue({
     //
     const USER = JSON.parse(localStorage.getItem("tokenUser"));
     //
-    if (USER) {
-      this.$store.commit(Type.SET_USER_DATA, USER);
-    }
+    if (USER) this.$store.commit(this.$Type.SET_USER_DATA, USER);
+    //
+    axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response.status === 401)
+          this.$store.dispatch(this.$Type.SIGN_OUT);
+        return Promise.reject(error);
+      }
+    );
   },
   render: (h) => h(App),
 }).$mount("#app");

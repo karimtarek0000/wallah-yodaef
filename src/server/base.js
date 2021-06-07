@@ -19,18 +19,3 @@ const USER = JSON.parse(localStorage.getItem("tokenUser"));
 axios.defaults.headers.common["Accept-Language"] = "ar";
 if (USER)
   axios.defaults.headers.common["Authorization"] = `Bearer ${USER.token}`;
-
-// INTERCEPTORS
-// axios.interceptors.response.use(
-//   (response) => {
-//     response.time = new Date();
-//     return response;
-//   },
-//   (error) => {
-//     if (error.response.status === 403) {
-//       return Promise.reject((error.response.fail = "some error 😂"));
-//     }
-
-//     return Promise.reject(error);
-//   }
-// );
