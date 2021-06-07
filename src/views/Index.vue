@@ -38,6 +38,8 @@
     </div>
     <!-- Model  -->
     <Model />
+    <!--  -->
+    <ConfirmAlert />
   </div>
 </template>
 
@@ -46,9 +48,8 @@
 import Navbar from "@/components/layout/Navbar";
 import NavbarOptions from "@/components/layout/NavbarOptions";
 import Model from "@/components/Model";
+import ConfirmAlert from "@/components/ConfirmAlert";
 import AllNotification from "@/components/AllNotification";
-import * as Type from "@/store/Type.js";
-
 //
 export default {
   name: "Index",
@@ -59,13 +60,14 @@ export default {
   },
   computed: {
     getStatusToggleNotifi() {
-      return this.$store.getters[Type.GET_TOGGLE_NOTIFI];
+      return this.$store.getters[this.$Type.GET_TOGGLE_NOTIFI];
     },
   },
   components: {
     Navbar,
     NavbarOptions,
     Model,
+    ConfirmAlert,
     AllNotification,
   },
 };

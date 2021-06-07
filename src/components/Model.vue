@@ -2,7 +2,7 @@
   <div
     v-show="statusModel.status"
     @click="close"
-    ref="donation"
+    ref="drop"
     class="
       model-donation
       overflow-hidden
@@ -115,9 +115,6 @@
 </template>
 
 <script>
-//
-import * as Type from "@/store/Type.js";
-//
 export default {
   name: "ModelDonation",
   data() {
@@ -130,7 +127,7 @@ export default {
     close() {
       this.amount = null;
       this.$store.commit(
-        Type.SET_STATUS_MODEL_DONATION,
+        this.$Type.SET_STATUS_MODEL_DONATION,
         Object.assign(this.statusModel, { status: false })
       );
     },
@@ -145,7 +142,7 @@ export default {
   computed: {
     //
     statusModel() {
-      return this.$store.getters[Type.GET_STATUS_MODEL_DONATION];
+      return this.$store.getters[this.$Type.GET_STATUS_MODEL_DONATION];
     },
   },
   watch: {
@@ -159,10 +156,10 @@ export default {
   },
   mounted() {
     //
-    this.$refs.donation.addEventListener("keydown", this.escapeClose);
+    this.$refs.drop.addEventListener("keydown", this.escapeClose);
     //
     this.$once("hook:destroyed", () => {
-      this.$refs.donation.removeEventListener("keydown", this.escapeClose);
+      this.$refs.drop.removeEventListener("keydown", this.escapeClose);
     });
   },
 };

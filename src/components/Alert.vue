@@ -19,21 +19,18 @@
 </template>
 
 <script>
-//
-import * as Type from "@/store/Type.js";
-//
 export default {
   name: "Alert",
   computed: {
     getInfoAlert() {
-      return this.$store.getters[Type.GET_ALERT];
+      return this.$store.getters[this.$Type.GET_ALERT];
     },
   },
   watch: {
     "getInfoAlert.status"(value) {
       if (value) {
         setTimeout(() => {
-          this.$store.commit(Type.SET_ALERT, {
+          this.$store.commit(this.$Type.SET_ALERT, {
             status: false,
             text: null,
           });

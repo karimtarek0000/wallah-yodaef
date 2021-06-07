@@ -15,6 +15,8 @@ import "./server/base.js";
 //
 Vue.config.productionTip = false;
 //
+Vue.prototype.$Type = Type;
+//
 Vue.use(Vuelidate);
 //
 Vue.component("GSvg", GSvg);

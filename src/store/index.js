@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
 import * as Type from "./Type.js";
+import Auth from "./Auth/auth.js";
 
 Vue.use(Vuex);
 
@@ -14,12 +14,15 @@ export default new Vuex.Store({
       title: null,
       nameBtn: null,
     },
+    statusConfirmAlert: {
+      status: false,
+      confirm: false,
+    },
     toggleNotifi: false,
     alert: {
       status: false,
       text: null,
     },
-    dataUser: null,
   },
   getters: {
     //
@@ -34,11 +37,23 @@ export default new Vuex.Store({
     [Type.GET_ALERT](state) {
       return state.alert;
     },
+    //
+    [Type.GET_STATUS_CONFIRM_ALERT](state) {
+      return state.statusConfirmAlert;
+    },
   },
   mutations: {
     //
     [Type.SET_STATUS_MODEL_DONATION](state, payload) {
       state.statusModelDonation = payload;
+    },
+    //
+    [Type.TOGGLE_CONFIRM_ALERT](state, payload) {
+      state.statusConfirmAlert.status = payload;
+    },
+    //
+    [Type.SET_CONFIRM_ALERT](state, payload) {
+      state.statusConfirmAlert.confirm = payload;
     },
     //
     [Type.SET_TOGGLE_NOTIFI](state, payload) {
@@ -48,71 +63,8 @@ export default new Vuex.Store({
     [Type.SET_ALERT](state, payload) {
       state.alert = payload;
     },
-    //
-    [Type.SET_USER_DATA](state, payload) {
-      const { id, name, token } = payload;
-      //
-      state.dataUser = payload;
-      //
-      localStorage.setItem("tokenUser", JSON.stringify({ token, id, name }));
-    },
   },
-  actions: {
-    //
-    async [Type.REGISTER]({ commit }, payload) {
-      try {
-        const data = await axios.post("/register", payload);
-        //
-        commit(Type.SET_ALERT, {
-          status: true,
-          text: "تم التسجيل بنجاح",
-        });
-        //
-        return Promise.resolve(data);
-      } catch (err) {
-        //
-        commit(Type.SET_ALERT, {
-          status: true,
-          text: err.response.data.error.replace(".", ""),
-        });
-        //
-        return Promise.reject(err);
-      }
-    },
-    //
-    async [Type.SIGN_IN]({ commit }, payload) {
-      try {
-        //
-        const { data } = await axios.post("/login", {
-          ...payload,
-          fcm_token:
-            "fdMVmHPiNyE:APA91bGMFftB8ZkeFuV4DTwig046JkvvwIbn1tFKxZx4CGO516Z7jqAqrvTOwcBwLQ9_paSUCLV6z0p-EOoM9xj2EleckAXOnHHQ8Vn8xikniFXFExD92NrjN2mLY-alKBD5p7DG5hS1",
-        });
-
-        //
-        const { id, name, token } = data;
-
-        //
-        commit(Type.SET_ALERT, {
-          status: true,
-          text: "تم تسجيل الدخول",
-        });
-
-        //
-        commit(Type.SET_USER_DATA, { id, name, token });
-
-        //
-        return Promise.resolve(true);
-      } catch (err) {
-        //
-        commit(Type.SET_ALERT, {
-          status: true,
-          text: err.response.data.error.replace(".", ""),
-        });
-
-        //
-        return Promise.reject(err);
-      }
-    },
+  modules: {
+    Auth,
   },
 });

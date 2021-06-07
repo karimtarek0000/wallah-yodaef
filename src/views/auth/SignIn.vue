@@ -18,8 +18,6 @@
 
 <script>
 //
-import * as Type from "@/store/Type.js";
-//
 export default {
   name: "SignIn",
   data() {
@@ -35,7 +33,7 @@ export default {
       this.statusAlert = true;
       //
       this.$store
-        .dispatch(Type.SIGN_IN, data)
+        .dispatch(this.$Type.SIGN_IN, data)
         .then(() => {
           this.statusAlert = false;
           //

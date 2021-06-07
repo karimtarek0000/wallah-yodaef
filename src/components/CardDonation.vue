@@ -42,14 +42,11 @@
 </template>
 
 <script>
-//
-import * as Type from "@/store/Type.js";
-//
 export default {
   name: "CardDonation",
   methods: {
     openModel() {
-      this.$store.commit(Type.SET_STATUS_MODEL_DONATION, {
+      this.$store.commit(this.$Type.SET_STATUS_MODEL_DONATION, {
         status: true,
         icon: "balance",
         title: "أدخل المبلغ الذي تريد التبرع به",

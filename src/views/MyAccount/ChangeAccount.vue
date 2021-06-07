@@ -372,7 +372,7 @@ export default {
       }
 
       // Back to MyAccount
-      this.$router.push({ name: "Account" });
+      // this.$router.push({ name: "Account" });
     },
   },
   watch: {

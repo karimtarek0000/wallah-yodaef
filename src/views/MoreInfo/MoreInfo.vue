@@ -95,11 +95,25 @@
 </template>
 
 <script>
+//
+import * as Type from "@/store/Type";
+//
 export default {
   name: "MoreInfo",
+  computed: {
+    statusConfirm() {
+      return this.$store.getters[Type.GET_STATUS_CONFIRM_ALERT];
+    },
+  },
   methods: {
+    //
     logOut() {
-      console.log("log out");
+      this.$store.commit(Type.TOGGLE_CONFIRM_ALERT, true);
+    },
+  },
+  watch: {
+    "statusConfirm.confirm"(n) {
+      if (n) this.$store.dispatch(Type.SIGN_OUT);
     },
   },
 };
