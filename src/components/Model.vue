@@ -106,7 +106,8 @@
               lg-text-22
             "
             type="submit"
-            :nameBtn="statusModel.nameBtn"
+            :disabled="!amount"
+            :nameBtn="!textBtn ? statusModel.nameBtn : textBtn"
           />
         </form>
       </div>
@@ -120,6 +121,7 @@ export default {
   data() {
     return {
       amount: null,
+      textBtn: null,
     };
   },
   methods: {
@@ -137,8 +139,14 @@ export default {
     },
     //
     submitDonate() {
-      this.$store.dispatch(this.$Type.DONATE, 3000);
-      console.log("send");
+      if (this.amount && !isNaN(this.amount)) {
+        //
+        this.$store.dispatch(this.$Type.DONATE, this.amount).then(() => {
+          this.textBtn = "تم الارسال";
+          //
+          setTimeout(() => location.reload(), 1000);
+        });
+      }
     },
   },
   computed: {

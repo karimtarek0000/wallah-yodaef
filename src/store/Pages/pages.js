@@ -68,15 +68,22 @@ const actions = {
     commit(Type.SET_DONATIONS_SHOW, data);
   },
   //
-  async [Type.DONATE]({ getters }, donate) {
-    const data = Object.assign(
-      {},
-      { charity_id: getters[Type.GET_DATA_MODEL].id, to_be_paid: donate }
-    );
-
-    console.log(data);
-
-    // const data = await axios.post("/charity_donate");
+  async [Type.DONATE]({ commit, getters }, donate) {
+    try {
+      //
+      const data = await Object.assign(
+        {},
+        { charity_id: getters[Type.GET_DATA_MODEL].id, to_be_paid: donate }
+      );
+      //
+      await axios.post("/charity_donate", data);
+      //
+      commit(Type.SET_DATA_MODEL, null);
+      //
+      return Promise.resolve(true);
+    } catch {
+      return Promise.reject(false);
+    }
   },
 };
 
