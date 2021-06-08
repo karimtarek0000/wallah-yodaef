@@ -5,6 +5,9 @@ import * as Type from "../Type.js";
 const state = {
   aboutSite: null,
   terms: null,
+  donations: null,
+  //
+  dataModel: null,
 };
 
 //
@@ -17,6 +20,14 @@ const getters = {
   [Type.GET_TERMS](state) {
     return state.terms;
   },
+  //
+  [Type.GET_DONATIONS_SHOW](state) {
+    return state.donations;
+  },
+  //
+  [Type.GET_DATA_MODEL](state) {
+    return state.dataModel;
+  },
 };
 
 //
@@ -28,6 +39,14 @@ const mutations = {
   //
   [Type.SET_TERMS](state, payload) {
     state.terms = payload;
+  },
+  //
+  [Type.SET_DONATIONS_SHOW](state, payload) {
+    state.donations = payload;
+  },
+  //
+  [Type.SET_DATA_MODEL](state, payload) {
+    state.dataModel = payload;
   },
 };
 
@@ -43,6 +62,23 @@ const actions = {
     const { data } = await axios.get("/terms");
     commit(Type.SET_TERMS, data.content);
   },
+  //
+  async [Type.DONATIONS_SHOW]({ commit }) {
+    const { data } = await axios.get("/charity_show");
+    commit(Type.SET_DONATIONS_SHOW, data);
+  },
+  //
+  async [Type.DONATE]({ getters }, donate) {
+    const data = Object.assign(
+      {},
+      { charity_id: getters[Type.GET_DATA_MODEL].id, to_be_paid: donate }
+    );
+
+    console.log(data);
+
+    // const data = await axios.post("/charity_donate");
+  },
 };
 
+//
 export default { state, actions, mutations, getters };

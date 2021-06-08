@@ -20,16 +20,15 @@
       <p
         role="description"
         class="margin-bottom-1rem flex-shrink-0 md-text-20 text-16 weight-bold"
-      >
-        مشروع اكفل قرية فقيرة
-      </p>
+        v-text="data.name"
+      />
       <div role="other-info" class="d-flex flex-shrink-0 align-items-center">
         <GSvg
           class="svg-20 margin-end-5px fill-gray"
           nameIcon="location"
           title="location"
         />
-        <p role="location" class="md-text-18 text-14">الرياض - السعودية</p>
+        <p role="location" class="md-text-18 text-14" v-text="data.address" />
       </div>
     </div>
     <!--  -->
@@ -44,15 +43,23 @@
 <script>
 export default {
   name: "CardDonation",
+  props: {
+    data: {
+      type: Object,
+      required: true,
+    },
+  },
   methods: {
     openModel() {
+      // 1) - OPEN MODEL
       this.$store.commit(this.$Type.SET_STATUS_MODEL_DONATION, {
         status: true,
         icon: "balance",
         title: "أدخل المبلغ الذي تريد التبرع به",
         nameBtn: "تاكيد",
       });
-      console.log("submited");
+      // 2) - SEND DATA TO VUEX
+      this.$store.commit(this.$Type.SET_DATA_MODEL, this.data);
     },
   },
 };

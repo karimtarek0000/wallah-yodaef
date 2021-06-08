@@ -49,7 +49,7 @@
         </figure>
         <!-- Form -->
         <form
-          @submit.prevent="s"
+          @submit.prevent="submitDonate"
           class="
             d-flex
             flex-direction-column
@@ -135,8 +135,10 @@ export default {
     escapeClose(e) {
       if (e.key === "Escape") this.close();
     },
-    s() {
-      console.log("form");
+    //
+    submitDonate() {
+      this.$store.dispatch(this.$Type.DONATE, 3000);
+      console.log("send");
     },
   },
   computed: {
