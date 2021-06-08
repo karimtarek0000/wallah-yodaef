@@ -38,7 +38,7 @@
         user-select
       "
     >
-      <span role="amount" class="text-40">3000</span>
+      <span role="amount" class="text-40" v-text="getCashWallet" />
       <span role="currancy" class="text-20">ريال سعودي</span>
     </figure>
     <!--  -->
@@ -59,20 +59,28 @@
 </template>
 
 <script>
-//
-import * as Type from "@/store/Type.js";
-//
 export default {
   name: "Wallet",
   methods: {
     openModel() {
-      this.$store.commit(Type.SET_STATUS_MODEL_DONATION, {
+      // 1) - OPEN MODEL
+      this.$store.commit(this.$Type.SET_STATUS_MODEL_DONATION, {
         status: true,
         icon: "hand",
         title: "أدخل المبلغ الذي تريد شحنه في المحفظة",
         nameBtn: "شحن الرصيد",
+        type: "wallet",
       });
+      //
     },
+  },
+  computed: {
+    getCashWallet() {
+      return this.$store.getters[this.$Type.GET_CASH_WALLET];
+    },
+  },
+  created() {
+    this.$store.dispatch(this.$Type.GET_WALLET);
   },
 };
 </script>

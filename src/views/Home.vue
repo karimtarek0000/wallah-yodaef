@@ -1,6 +1,18 @@
 <template>
-  <section class="d-flex justify-content-between flex-wrap-wrap">
+  <section
+    :class="[
+      'd-flex  flex-wrap-wrap',
+      { 'justify-content-center': !getDonationsShow },
+      { 'justify-content-between': getDonationsShow },
+    ]"
+  >
+    <!--  -->
+    <p v-if="!getDonationsShow" class="text-22 margin-top-4rem user-select">
+      لا يوجد بيانات
+    </p>
+    <!--  -->
     <CardDonation
+      v-else
       v-for="donation in getDonationsShow"
       :key="donation.id"
       :data="donation"

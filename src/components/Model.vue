@@ -49,7 +49,7 @@
         </figure>
         <!-- Form -->
         <form
-          @submit.prevent="submitDonate"
+          @submit.prevent="submitData"
           class="
             d-flex
             flex-direction-column
@@ -93,6 +93,13 @@
             >
           </figure>
           <!--  -->
+          <p v-if="messageNoMony" class="text-16">
+            <span
+              v-text="messageNoMony"
+              class="margin-y-1rem margin-end-1rem"
+            />
+          </p>
+          <!--  -->
           <BtnPrimary
             class="
               bg-red-light
@@ -116,15 +123,23 @@
 </template>
 
 <script>
+import * as Type from "@/store/Type.js";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "ModelDonation",
   data() {
     return {
       amount: null,
       textBtn: null,
+      messageNoMony: null,
     };
   },
   methods: {
+    ...mapActions({
+      GET_WALLET: Type.GET_WALLET,
+      DONATE: Type.DONATE,
+      SET_WALLET: Type.SET_WALLET,
+    }),
     //
     close() {
       this.amount = null;
@@ -138,22 +153,48 @@ export default {
       if (e.key === "Escape") this.close();
     },
     //
-    submitDonate() {
-      if (this.amount && !isNaN(this.amount)) {
+    async donate() {
+      // 1) - GET CASH WALLET
+      await this.GET_WALLET;
+      // 2) - IF AMOUNT LETH THAN OR EQAL GETWALLET WILL RUN ALL ACTIONS
+      if (this.amount <= this.getWallet) {
         //
-        this.$store.dispatch(this.$Type.DONATE, this.amount).then(() => {
-          this.textBtn = "تم الارسال";
+        this.DONATE(this.amount).then(() => {
+          this.textBtn = "تم التبرع";
+          this.messageNoMony = null;
+          this.amount = null;
           //
           setTimeout(() => location.reload(), 1000);
         });
+      } else {
+        this.messageNoMony = "القيمه المدخله اكبر من الرصيد";
+      }
+    },
+    //
+    wallet() {
+      //
+      this.SET_WALLET(this.amount).then(() => {
+        this.textBtn = "تم الشحن";
+        this.amount = null;
+        //
+        setTimeout(() => location.reload(), 1000);
+      });
+    },
+    //
+    submitData() {
+      if (this.amount && !isNaN(this.amount)) {
+        // DONATE
+        if (this.statusModel.type === "donate") this.donate();
+        // WALLET
+        if (this.statusModel.type === "wallet") this.wallet();
       }
     },
   },
   computed: {
-    //
-    statusModel() {
-      return this.$store.getters[this.$Type.GET_STATUS_MODEL_DONATION];
-    },
+    ...mapGetters({
+      statusModel: Type.GET_STATUS_MODEL_DONATION,
+      getWallet: Type.GET_CASH_WALLET,
+    }),
   },
   watch: {
     statusModel(n) {

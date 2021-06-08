@@ -7,6 +7,7 @@ const state = {
     icon: "",
     title: null,
     nameBtn: null,
+    type: null,
   },
   statusConfirmAlert: {
     status: false,

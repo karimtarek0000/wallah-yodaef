@@ -23,10 +23,12 @@ const routes = [
         },
       },
       {
-        path: "/donation",
-        name: "Donation",
+        path: "/donation-log",
+        name: "DonationsLog",
         component: () =>
-          import(/* webpackChunkName: "donation" */ "../views/Donation.vue"),
+          import(
+            /* webpackChunkName: "donations-log" */ "../views/DonationsLog.vue"
+          ),
         meta: {
           head: "سجل التبرعات",
         },

@@ -6,6 +6,8 @@ const state = {
   aboutSite: null,
   terms: null,
   donations: null,
+  donationsRecordes: null,
+  wallet: null,
   //
   dataModel: null,
 };
@@ -28,6 +30,14 @@ const getters = {
   [Type.GET_DATA_MODEL](state) {
     return state.dataModel;
   },
+  //
+  [Type.GET_DONATIONS_RECORDES](state) {
+    return state.donationsRecordes;
+  },
+  //
+  [Type.GET_CASH_WALLET](state) {
+    return state.wallet;
+  },
 };
 
 //
@@ -47,6 +57,14 @@ const mutations = {
   //
   [Type.SET_DATA_MODEL](state, payload) {
     state.dataModel = payload;
+  },
+  //
+  [Type.SET_DONATIONS_RECORDES](state, payload) {
+    state.donationsRecordes = payload;
+  },
+  //
+  [Type.SET_CASH_WALLET](state, payload) {
+    state.wallet = payload;
   },
 };
 
@@ -83,6 +101,31 @@ const actions = {
       return Promise.resolve(true);
     } catch {
       return Promise.reject(false);
+    }
+  },
+  //
+  async [Type.DONATIONS_RECORDS]({ commit }) {
+    //
+    const { data } = await axios.get("/donate_records");
+    //
+    commit(Type.SET_DONATIONS_RECORDES, data);
+  },
+  //
+  async [Type.GET_WALLET]({ commit }) {
+    const { data } = await axios.get("/get_wallet");
+    //
+    commit(Type.SET_CASH_WALLET, +data.app_cash);
+  },
+  //
+  async [Type.SET_WALLET]({ commit }, amount) {
+    try {
+      await axios.post("/update_wallet", { app_cash: amount, cash: amount });
+      //
+      commit(Type.SET_DATA_MODEL, null);
+      //
+      return Promise.resolve(true);
+    } catch {
+      return Promise.reject(true);
     }
   },
 };

@@ -65,7 +65,7 @@ export default {
         {
           icon: "paper",
           name: "سجل التبرعات",
-          namePath: "Donation",
+          namePath: "DonationsLog",
         },
         {
           icon: "wallet",

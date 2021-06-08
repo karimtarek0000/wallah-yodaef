@@ -57,6 +57,7 @@ export default {
         icon: "balance",
         title: "أدخل المبلغ الذي تريد التبرع به",
         nameBtn: "تاكيد",
+        type: "donate",
       });
       // 2) - SEND DATA TO VUEX
       this.$store.commit(this.$Type.SET_DATA_MODEL, this.data);
