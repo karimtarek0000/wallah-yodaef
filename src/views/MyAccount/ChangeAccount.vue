@@ -1,5 +1,5 @@
 <template>
-  <!-- Form -->
+  <!-- form -->
   <form
     @submit.prevent="submit"
     class="
@@ -111,64 +111,9 @@
         يجب ادخال ارقام فقط
       </p>
     </div>
-    <!-- Old Password -->
-    <div
-      class="
-        d-flex
-        xlg-width-60
-        md-width-90
-        lg-width-70
-        sm-width-100
-        margin-bottom-2rem
-        flex-direction-column
-        border-bottom
-      "
-    >
-      <label
-        for="old-pas"
-        class="
-          text-red-light
-          weight-bold
-          padding-x-2rem
-          margin-bottom-1rem
-          xlg-text-20
-          text-25
-        "
-        >كلمة السر</label
-      >
-      <div class="position-rel d-flex">
-        <input
-          readonly
-          :type="visible1 ? 'text' : 'password'"
-          id="old-pas"
-          v-model="form.password"
-          class="
-            padding-y-1rem padding-x-2rem
-            xlg-text-18
-            text-22
-            flex-grow-1
-            weight-bold,
-          "
-          placeholder="كلمة السر"
-        />
-        <!--  -->
-        <figure
-          v-show="form.password"
-          @click="visible1 = !visible1"
-          role="icon-visible"
-          class="register-icon position-abs"
-        >
-          <GSvg
-            :class="['svg-30 fill-gray', { 'fill-red-light': visible1 }]"
-            :nameIcon="visible1 ? 'visibility' : 'unvisibility'"
-            :title="visible1 ? 'visible' : 'unvisible'"
-          />
-        </figure>
-      </div>
-    </div>
     <!--  -->
     <!-- New Password -->
-    <div
+    <!-- <div
       class="
         d-flex
         xlg-width-60
@@ -205,7 +150,6 @@
           ]"
           placeholder="كلمة السر الجديدة"
         />
-        <!--  -->
         <figure
           v-show="form.newPassword"
           @click="visible2 = !visible2"
@@ -219,8 +163,6 @@
           />
         </figure>
       </div>
-      <!-- Messages -->
-      <!-- Error -->
       <p
         role="error"
         class="padding-x-2rem text-16 margin-top-1rem"
@@ -228,9 +170,9 @@
       >
         يجب الادخال لا يقل عن ١٠
       </p>
-    </div>
-    <!-- confirm New Password -->
-    <div
+    </div> -->
+    <!-- Confirm New Password -->
+    <!-- <div
       class="
         d-flex
         xlg-width-60
@@ -267,7 +209,6 @@
           ]"
           placeholder="تاكيد كلمة السر الجديدة"
         />
-        <!--  -->
         <figure
           v-show="form.confirmNewPassword"
           @click="visible3 = !visible3"
@@ -281,8 +222,6 @@
           />
         </figure>
       </div>
-      <!-- Messages -->
-      <!-- Error -->
       <p
         role="error"
         class="padding-x-2rem text-16"
@@ -293,30 +232,43 @@
       >
         غير متوافق مع كلمة السر الجديدة
       </p>
-    </div>
+    </div> -->
     <!--  -->
     <BtnPrimary
       class="width-276px padding-y-1rem text-18 lg-text-22 margin-y-2rem"
       type="submit"
-      nameBtn="تحديث"
-    />
+      :nameBtn="initLoading.loadingText ? initLoading.loadingText : 'تحديث'"
+    >
+      <span
+        v-show="initLoading.loadingStatus"
+        class="
+          d-block
+          width-3rem
+          height-3rem
+          radius-circle
+          border-loading
+          margin-end-1rem
+          loading
+        "
+      ></span>
+    </BtnPrimary>
   </form>
 </template>
 
 <script>
 //
-import { required, numeric, minLength, sameAs } from "vuelidate/lib/validators";
+// import { required, numeric, minLength, sameAs } from "vuelidate/lib/validators";
+import { required, numeric } from "vuelidate/lib/validators";
 //
 export default {
   name: "ChangeAccount",
   props: {
     dataUser: {
       type: Object,
-      required: true,
+      required: false,
     },
     image: {
-      type: File,
-      required: false,
+      required: true,
     },
   },
   data() {
@@ -327,13 +279,7 @@ export default {
       visible2: null,
       visible3: null,
       //
-      form: {
-        name: this.dataUser.name,
-        phone: this.dataUser.phone,
-        password: this.dataUser.password,
-        newPassword: null,
-        confirmNewPassword: null,
-      },
+      form: this.dataUser,
     };
   },
   validations: {
@@ -345,12 +291,18 @@ export default {
         required,
         numeric,
       },
-      newPassword: {
-        minLength: minLength(10),
-      },
-      confirmNewPassword: {
-        sameAsNewPassword: sameAs("newPassword"),
-      },
+      // newPassword: {
+      //   minLength: minLength(10),
+      // },
+      // confirmNewPassword: {
+      //   sameAsNewPassword: sameAs("newPassword"),
+      // },
+    },
+  },
+  computed: {
+    //
+    initLoading() {
+      return this.$store.getters[this.$Type.GET_INIT_LOADING];
     },
   },
   methods: {
@@ -361,27 +313,25 @@ export default {
         this.$v.$touch();
 
         // 2) - If validated will be send new data
-        if (!this.$v.form.$invalid) {
-          console.log("change data");
-        }
+        if (!this.$v.form.$invalid) this.$emit("dataChanged");
       }
 
       //
-      if (this.changeImage) {
-        console.log("change image and send");
-      }
-
-      // Back to MyAccount
-      // this.$router.push({ name: "Account" });
+      if (this.changeImage) this.$emit("imageChanged");
     },
   },
-  watch: {
+  //
+  beforeRouteLeave(to, from, next) {
+    if (this.changeData || this.changeImage) return location.reload();
     //
-    form: {
-      deep: true,
-      handler() {
-        this.changeData = true;
-      },
+    return next();
+  },
+  watch: {
+    "form.name"(n, d) {
+      if (d !== null) this.changeData = true;
+    },
+    "form.phone"(n, d) {
+      if (d !== null) this.changeData = true;
     },
     image() {
       this.changeImage = true;

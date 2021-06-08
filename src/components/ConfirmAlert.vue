@@ -24,7 +24,7 @@
           radius-10
         "
       >
-        <span>هل تريد الخروج ؟</span>
+        <span class="no-wrap">هل تريد الخروج ؟</span>
         <div class="d-flex margin-top-2rem">
           <!--  -->
           <button

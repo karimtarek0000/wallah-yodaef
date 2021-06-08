@@ -95,25 +95,22 @@
 </template>
 
 <script>
-//
-import * as Type from "@/store/Type";
-//
 export default {
   name: "MoreInfo",
   computed: {
     statusConfirm() {
-      return this.$store.getters[Type.GET_STATUS_CONFIRM_ALERT];
+      return this.$store.getters[this.$Type.GET_STATUS_CONFIRM_ALERT];
     },
   },
   methods: {
     //
     logOut() {
-      this.$store.commit(Type.TOGGLE_CONFIRM_ALERT, true);
+      this.$store.commit(this.$Type.TOGGLE_CONFIRM_ALERT, true);
     },
   },
   watch: {
     "statusConfirm.confirm"(n) {
-      if (n) this.$store.dispatch(Type.SIGN_OUT);
+      if (n) this.$store.dispatch(this.$Type.SIGN_OUT);
     },
   },
 };

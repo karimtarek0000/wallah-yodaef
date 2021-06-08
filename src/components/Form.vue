@@ -523,7 +523,7 @@ export default {
 
 //
 .loading {
-  animation: circle 0.5s linear forwards;
+  animation: circle 0.5s infinite linear forwards;
 }
 
 //

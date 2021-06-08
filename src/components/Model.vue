@@ -63,7 +63,13 @@
         >
           <label
             for="donation"
-            class="text-20 lg-text-25 weight-bold margin-top-2rem"
+            class="
+              text-20
+              lg-text-25
+              weight-bold
+              text-align-center
+              margin-top-2rem
+            "
             >{{ statusModel.title }}</label
           >
           <figure
@@ -155,7 +161,7 @@ export default {
     //
     async donate() {
       // 1) - GET CASH WALLET
-      await this.GET_WALLET;
+      await this.GET_WALLET();
       // 2) - IF AMOUNT LETH THAN OR EQAL GETWALLET WILL RUN ALL ACTIONS
       if (this.amount <= this.getWallet) {
         //
@@ -203,6 +209,9 @@ export default {
           setTimeout(() => this.$refs.donationInput.focus(), 500);
         });
       }
+    },
+    "statusModel.status"(n) {
+      if (!n) this.messageNoMony = null;
     },
   },
   mounted() {

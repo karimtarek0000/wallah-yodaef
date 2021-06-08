@@ -36,6 +36,7 @@ export default {
     CardDonation,
   },
   created() {
+    //
     this.$store.dispatch(this.$Type.DONATIONS_SHOW);
   },
 };

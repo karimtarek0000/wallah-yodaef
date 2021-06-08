@@ -83,48 +83,6 @@
         placeholder="رقم الجوال"
       />
     </div>
-    <!-- Old Password -->
-    <div
-      class="
-        d-flex
-        xlg-width-60
-        md-width-90
-        lg-width-70
-        sm-width-100
-        margin-bottom-2rem
-        flex-direction-column
-        border-bottom
-      "
-    >
-      <label
-        for="old-pas"
-        class="
-          text-red-light
-          weight-bold
-          padding-x-2rem
-          margin-bottom-1rem
-          xlg-text-20
-          text-25
-        "
-        >كلمة السر</label
-      >
-      <div class="position-rel d-flex">
-        <input
-          readonly
-          :value="dataUser.password"
-          type="password"
-          id="old-pas"
-          class="
-            padding-y-1rem padding-x-2rem
-            xlg-text-18
-            text-22
-            flex-grow-1
-            weight-bold,
-          "
-          placeholder="كلمة السر"
-        />
-      </div>
-    </div>
     <!-- Go to page change account -->
     <router-link
       class="

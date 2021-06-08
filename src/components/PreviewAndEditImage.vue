@@ -22,13 +22,18 @@
           "
         >
           <!-- Show image from api -->
-          <template v-if="renderIf">
-            <img ref="image" src="/img/test.jpg" class="resize-img" />
-          </template>
+          <img
+            ref="image"
+            v-if="imageUser"
+            :src="`/${imageUser}`"
+            class="resize-img"
+          />
+          <img ref="image" v-else src="/img/avatar.png" class="resize-img" />
           <!-- Show image when user selected image -->
-          <template v-else>
-            <img class="resize-img" src="/img/test.jpg" />
-          </template>
+          <!-- <template v-else>
+            <img class="resize-img" v-if="imageUser" :src="`/${imageUser}`" />
+            <img ref="image" v-else src="/img/avatar.png" class="resize-img" />
+          </template> -->
         </figure>
         <!--  -->
         <label

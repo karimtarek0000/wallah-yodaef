@@ -170,3 +170,8 @@ input {
     box-shadow: 3px 0px 10px lighten($gray, 20%);
   }
 }
+
+//
+.no-wrap {
+  white-space: nowrap;
+}

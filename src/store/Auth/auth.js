@@ -4,6 +4,24 @@ import * as Type from "../Type.js";
 const state = {
   dataUser: null,
   expireToken: null,
+  profileUser: null,
+  //
+  initLoading: {
+    loadingStatus: false,
+    loadingText: null,
+  },
+};
+
+//
+const getters = {
+  //
+  [Type.GET_PROFILE_USER](state) {
+    return state.profileUser;
+  },
+  //
+  [Type.GET_INIT_LOADING](state) {
+    return state.initLoading;
+  },
 };
 
 //
@@ -25,6 +43,14 @@ const mutations = {
     localStorage.removeItem("tokenUser");
     //
     location.reload();
+  },
+  //
+  [Type.SET_PROFILE_USER](state, payload) {
+    state.profileUser = payload;
+  },
+  //
+  [Type.SET_INIT_LOADING](state, payload) {
+    state.initLoading = payload;
   },
 };
 
@@ -92,7 +118,48 @@ const actions = {
   [Type.SIGN_OUT]({ commit }) {
     commit(Type.CLEAR_USER_DATA);
   },
+  //
+  async [Type.PROFILE_USER]({ commit }) {
+    const {
+      data: {
+        name,
+        image,
+        phone,
+        read_notifications: readNotifi,
+        unread_notifications: unreadNotifi,
+      },
+    } = await axios.get("/user_profile");
+    //
+    const profileUser = await Object.assign(
+      {},
+      { name, image, phone, readNotifi, unreadNotifi }
+    );
+    //
+    commit(Type.SET_PROFILE_USER, profileUser);
+  },
+  //
+  async [Type.UPDATE_IMAGE]({ commit }, image) {
+    try {
+      commit(Type.SET_INIT_LOADING, {
+        loadingStatus: true,
+        loadingText: "يتم الان رفع الصوره",
+      });
+      await axios.post("/update_image", image);
+      commit(Type.SET_INIT_LOADING, {
+        loadingStatus: false,
+        loadingText: "تم رفع الصوره",
+      });
+      //
+      return Promise.resolve(true);
+    } catch {
+      commit(Type.SET_INIT_LOADING, {
+        loadingStatus: false,
+        loadingText: "حدث خطا",
+      });
+      return Promise.reject(false);
+    }
+  },
 };
 
 //
-export default { state, mutations, actions };
+export default { state, getters, mutations, actions };
