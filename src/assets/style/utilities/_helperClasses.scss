@@ -97,7 +97,8 @@
 }
 
 //
-input {
+input,
+textarea {
   all: unset;
   font-family: inherit;
 
@@ -109,7 +110,8 @@ input {
 
 //
 .register {
-  input {
+  input,
+  textarea {
     //
     &:focus {
       border: 1px solid $red-light-1;

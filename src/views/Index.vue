@@ -26,6 +26,7 @@
           min-height-88
           position-rel
           overflow-x
+          wrapper
         "
       >
         <!-- Pages -->

@@ -61,3 +61,9 @@ body {
 html[dir="rtl"] {
   direction: rtl;
 }
+
+//
+.wrapper,
+.all-notification {
+  @include scrollBar(2px, $gray, $red-light);
+}

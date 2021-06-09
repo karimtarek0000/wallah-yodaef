@@ -66,7 +66,6 @@ export default {
 .all-notification {
   width: 35%;
   @include position("rt", $moveR: 0, $moveT: 0);
-  @include scrollBar(2px, $gray, $red-light);
   @include BreakPoint(lg) {
     width: 100%;
   }
