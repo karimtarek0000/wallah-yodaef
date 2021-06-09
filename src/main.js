@@ -38,6 +38,11 @@ router.beforeEach((to, from, next) => {
     store.dispatch(Type.SIGN_OUT);
   }
 
+  //
+  document.title = to.meta.title
+    ? `الله يضاعف | ${to.meta.title}`
+    : "الله يضاعف";
+
   next();
 });
 

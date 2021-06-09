@@ -31,6 +31,7 @@ const routes = [
           ),
         meta: {
           head: "سجل التبرعات",
+          title: "سجل التبرعات",
         },
       },
       {
@@ -40,6 +41,7 @@ const routes = [
           import(/* webpackChunkName: "wallet" */ "../views/Wallet.vue"),
         meta: {
           head: "المحفظة",
+          title: "المحفظة",
         },
       },
       {
@@ -60,6 +62,7 @@ const routes = [
               ),
             meta: {
               head: "حسابي",
+              title: "حسابي",
             },
           },
           {
@@ -71,6 +74,7 @@ const routes = [
               ),
             meta: {
               head: "تعديل حسابي",
+              title: "تعديل حسابي",
             },
           },
         ],
@@ -84,6 +88,7 @@ const routes = [
           ),
         meta: {
           head: "المزيد",
+          title: "المزيد",
         },
       },
       {
@@ -95,6 +100,7 @@ const routes = [
           ),
         meta: {
           head: "عن الموقع",
+          title: "عن الموقع",
         },
       },
       {
@@ -104,6 +110,7 @@ const routes = [
           import(/* webpackChunkName: "terms" */ "../views/MoreInfo/Terms.vue"),
         meta: {
           head: "الشروط و الاحكام",
+          title: "الشروط و الاحكام",
         },
       },
       {
@@ -115,9 +122,13 @@ const routes = [
           ),
         meta: {
           head: "تواصل معنا",
+          title: "تواصل معنا",
         },
       },
     ],
+    meta: {
+      title: "الرئيسية",
+    },
   },
   //
   {
@@ -182,6 +193,7 @@ const routes = [
     ],
     meta: {
       auth: true,
+      title: "تسجيل",
     },
   },
   //
@@ -189,6 +201,9 @@ const routes = [
     path: "*",
     name: "404",
     component: () => import(/* webpackChunkName: "404" */ "../views/404.vue"),
+    meta: {
+      title: "404",
+    },
   },
 ];
 
