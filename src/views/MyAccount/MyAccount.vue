@@ -19,6 +19,7 @@
         v-bind="{ dataUser, image: newImage }"
         @dataChanged="sendNewData"
         @imageChanged="sendNewImage"
+        @allDataChanged="sendAllData"
       />
     </div>
   </div>
@@ -42,24 +43,32 @@ export default {
     };
   },
   methods: {
+    //
     changeImage(file) {
       this.newImage = file;
     },
+    //
     sendNewData() {
-      console.log("change data");
+      this.$store
+        .dispatch(this.$Type.UPDATE_PROFILE, this.dataUser)
+        .then(() => setTimeout(() => location.reload(), 500))
+        .catch(() => setTimeout(() => location.reload(), 500));
     },
+    //
     sendNewImage() {
-      const formData = new FormData();
-      formData.append("image", this.newImage, this.newImage.name);
       //
       this.$store
-        .dispatch(this.$Type.UPDATE_IMAGE, formData)
-        .then(() => {
-          setTimeout(() => location.reload(), 500);
-        })
-        .catch(() => {
-          setTimeout(() => location.reload(), 500);
-        });
+        .dispatch(this.$Type.UPDATE_IMAGE, this.newImage)
+        .then(() => setTimeout(() => location.reload(), 500))
+        .catch(() => setTimeout(() => location.reload(), 500));
+    },
+    //
+    async sendAllData() {
+      //
+      await this.$store.dispatch(this.$Type.UPDATE_IMAGE, this.newImage);
+      await this.$store.dispatch(this.$Type.UPDATE_PROFILE, this.dataUser);
+      //
+      setTimeout(() => location.reload(), 500);
     },
   },
   computed: {

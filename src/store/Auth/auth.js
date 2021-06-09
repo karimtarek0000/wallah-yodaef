@@ -140,14 +140,39 @@ const actions = {
   //
   async [Type.UPDATE_IMAGE]({ commit }, image) {
     try {
+      const formData = new FormData();
+      formData.append("image", image, image.name);
+      //
       commit(Type.SET_INIT_LOADING, {
         loadingStatus: true,
         loadingText: "يتم الان رفع الصوره",
       });
-      await axios.post("/update_image", image);
+      await axios.post("/update_image", formData);
       commit(Type.SET_INIT_LOADING, {
         loadingStatus: false,
         loadingText: "تم رفع الصوره",
+      });
+      //
+      return Promise.resolve(true);
+    } catch {
+      commit(Type.SET_INIT_LOADING, {
+        loadingStatus: false,
+        loadingText: "حدث خطا",
+      });
+      return Promise.reject(false);
+    }
+  },
+  //
+  async [Type.UPDATE_PROFILE]({ commit }, newDataUser) {
+    try {
+      commit(Type.SET_INIT_LOADING, {
+        loadingStatus: true,
+        loadingText: "يتم التحديث",
+      });
+      await axios.post("/update_profile", newDataUser);
+      commit(Type.SET_INIT_LOADING, {
+        loadingStatus: false,
+        loadingText: "تم التحديث",
       });
       //
       return Promise.resolve(true);

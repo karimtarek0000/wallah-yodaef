@@ -308,16 +308,16 @@ export default {
   methods: {
     submit() {
       //
-      if (this.changeData) {
+      if (this.changeData && !this.changeImage) {
         // 1) - Check if validate or not
         this.$v.$touch();
-
         // 2) - If validated will be send new data
         if (!this.$v.form.$invalid) this.$emit("dataChanged");
       }
-
       //
-      if (this.changeImage) this.$emit("imageChanged");
+      if (this.changeImage && !this.changeData) this.$emit("imageChanged");
+      //
+      if (this.changeImage && this.changeData) this.$emit("allDataChanged");
     },
   },
   //
