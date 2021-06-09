@@ -33,10 +33,15 @@ export default {
       //
       this.$store
         .dispatch(this.$Type.REGISTER, data)
-        .then(() => (this.statusAlert = false))
+        .then(() => {
+          this.statusAlert = false;
+          //
+          setTimeout(() => this.$router.push({ name: "SignIn" }), 500);
+        })
         .catch(() => {
           this.statusDisabled = false;
           this.statusAlert = false;
+          location.reload();
         });
     },
   },

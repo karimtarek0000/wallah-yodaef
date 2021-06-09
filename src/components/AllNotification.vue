@@ -1,18 +1,22 @@
 <template>
   <div
     role="all-notification"
-    class="
-      all-notification
-      shadow-all-notifi
-      position-abs
-      d-block
-      bg-light-1
-      height-100
-      max-height-100
-      overflow-auto
-    "
+    :class="[
+      'all-notification shadow-all-notifi position-abs bg-light-1 height-100 max-height-100 overflow-auto',
+      {
+        'd-flex justify-content-center align-items-center':
+          getNotifi.length === 0,
+      },
+    ]"
   >
-    <CardNotification v-for="index in 12" :key="index" />
+    <template v-if="getNotifi.length !== 0">
+      <CardNotification
+        v-for="notifi in getNotifi"
+        :key="notifi.id"
+        :data="notifi"
+      />
+    </template>
+    <p v-else role="description" class="text-18">لا يوجد اشعارات</p>
   </div>
 </template>
 
@@ -30,11 +34,29 @@ export default {
       this.$store.commit(this.$Type.SET_TOGGLE_NOTIFI, false);
     },
   },
+  computed: {
+    //
+    getNotifi() {
+      return this.$store.getters[this.$Type.GET_NOTIFI].notifi;
+    },
+    //
+    getCountNotifi() {
+      return this.$store.getters[this.$Type.GET_NOTIFI].count
+        .unread_notifications;
+    },
+  },
   mounted() {
     window.addEventListener("click", this.closeNotifi);
   },
   destroyed() {
     window.removeEventListener("click", this.closeNotifi);
+  },
+  async created() {
+    //
+    await this.$store.dispatch(this.$Type.NOTIFI);
+    //
+    if (this.getCountNotifi !== 0)
+      this.$store.dispatch(this.$Type.COUNT_NOTIFI);
   },
 };
 </script>
@@ -44,7 +66,7 @@ export default {
 .all-notification {
   width: 35%;
   @include position("rt", $moveR: 0, $moveT: 0);
-
+  @include scrollBar(2px, $gray, $red-light);
   @include BreakPoint(lg) {
     width: 100%;
   }

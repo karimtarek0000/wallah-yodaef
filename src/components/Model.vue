@@ -145,6 +145,7 @@ export default {
       GET_WALLET: Type.GET_WALLET,
       DONATE: Type.DONATE,
       SET_WALLET: Type.SET_WALLET,
+      COUNT_NOTIFI: Type.COUNT_NOTIFI,
     }),
     //
     close() {
@@ -170,7 +171,11 @@ export default {
           this.messageNoMony = null;
           this.amount = null;
           //
-          setTimeout(() => location.reload(), 1000);
+          setTimeout(() => {
+            this.textBtn = "تاكيد";
+            this.close();
+            this.COUNT_NOTIFI();
+          }, 500);
         });
       } else {
         this.messageNoMony = "القيمه المدخله اكبر من الرصيد";
@@ -183,7 +188,11 @@ export default {
         this.textBtn = "تم الشحن";
         this.amount = null;
         //
-        setTimeout(() => location.reload(), 1000);
+        setTimeout(() => {
+          this.textBtn = "شحن الرصيد";
+          this.GET_WALLET();
+          this.close();
+        }, 500);
       });
     },
     //
