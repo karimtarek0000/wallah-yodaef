@@ -378,7 +378,7 @@
       </router-link>
       <!-- Submit -->
       <BtnPrimary
-        class="width-276px padding-y-1rem text-18 lg-text-22 margin-top-2rem"
+        class="width-276px padding-y-1rem text-18 lg-text-25 margin-top-2rem"
         type="submit"
         :disabled="statusDisabled"
         :nameBtn="nameBtn"

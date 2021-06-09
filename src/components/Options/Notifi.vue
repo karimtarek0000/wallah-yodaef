@@ -1,7 +1,7 @@
 <template>
   <figure @click.stop="toggleNotifi" class="notifi position-rel">
     <GSvg
-      class="svg-40 fill-black cursor-pointer"
+      class="svg-40 fill-red-light cursor-pointer"
       nameIcon="notifications"
       title="الاشعارات"
     />

@@ -139,7 +139,7 @@ export default {
 
 //
 .fix {
-  @media (max-width: 320px) {
+  @media (max-width: 343px) {
     width: 50px;
     text-overflow: ellipsis;
     overflow: hidden;

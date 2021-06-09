@@ -9,6 +9,19 @@
       },
     ]"
   >
+    <span
+      v-show="loading && getNotifi.length === 0"
+      class="
+        d-block
+        width-3rem
+        height-3rem
+        radius-circle
+        border-loading-2
+        margin-end-1rem
+        loading
+      "
+    ></span>
+    <!--  -->
     <template v-if="getNotifi.length !== 0">
       <CardNotification
         v-for="notifi in getNotifi"
@@ -16,7 +29,14 @@
         :data="notifi"
       />
     </template>
-    <p v-else role="description" class="text-18">لا يوجد اشعارات</p>
+    <!--  -->
+    <p
+      v-if="getNotifi.length === 0 && !loading"
+      role="description"
+      class="text-18"
+    >
+      لا يوجد اشعارات
+    </p>
   </div>
 </template>
 
@@ -26,6 +46,11 @@ import CardNotification from "@/components/CardNotification";
 //
 export default {
   name: "AllNotification",
+  data() {
+    return {
+      loading: true,
+    };
+  },
   components: {
     CardNotification,
   },
@@ -54,6 +79,7 @@ export default {
   async created() {
     //
     await this.$store.dispatch(this.$Type.NOTIFI);
+    this.loading = false;
     //
     if (this.getCountNotifi !== 0)
       this.$store.dispatch(this.$Type.COUNT_NOTIFI);

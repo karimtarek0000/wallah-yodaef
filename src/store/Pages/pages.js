@@ -5,8 +5,8 @@ import * as Type from "../Type.js";
 const state = {
   aboutSite: null,
   terms: null,
-  donations: null,
-  donationsRecordes: null,
+  donations: [],
+  donationsRecordes: [],
   wallet: null,
   //
   dataModel: null,
@@ -126,6 +126,39 @@ const actions = {
       return Promise.resolve(true);
     } catch {
       return Promise.reject(true);
+    }
+  },
+  //
+  // eslint-disable-next-line no-unused-vars
+  async [Type.CONTACT_US]({ commit }, data) {
+    try {
+      await axios.post("/contact_us", data);
+      return Promise.resolve(true);
+    } catch {
+      return Promise.reject(false);
+    }
+  },
+  //
+  async [Type.SEARCH]({ commit }, search) {
+    try {
+      let data = null;
+      if (search) {
+        data = await axios.post("/charity_search", { name: search });
+      } else {
+        data = await axios.post("/charity_search");
+      }
+      //
+      const refData = data.data.map((cur) => {
+        return {
+          id: cur.id,
+          address: cur.address,
+          name: cur.name,
+        };
+      });
+      //
+      commit(Type.SET_DONATIONS_SHOW, refData);
+    } catch {
+      commit(Type.SET_DONATIONS_SHOW, []);
     }
   },
 };

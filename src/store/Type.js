@@ -45,6 +45,8 @@ const UPDATE_IMAGE = "Auth/UPDATE_IMAGE";
 const UPDATE_PROFILE = "Auth/UPDATE_PROFILE";
 const COUNT_NOTIFI = "Other/GET_COUNT_NOTIFI";
 const NOTIFI = "Other/GET_NOTIFI";
+const CONTACT_US = "Pages/GET_CONTACT_US";
+const SEARCH = "Pages/SEARCH";
 //
 export {
   SET_STATUS_MODEL_DONATION,
@@ -93,4 +95,6 @@ export {
   UPDATE_PROFILE,
   COUNT_NOTIFI,
   NOTIFI,
+  CONTACT_US,
+  SEARCH,
 };

@@ -8,7 +8,6 @@
       d-flex
       lg-flex-direction-column
       flex-direction-row
-      align-items-center
       overflow-auto
       xlg-justify-content-center
       padding-top-2rem
@@ -163,6 +162,7 @@
           >اكتب رسالتك</label
         >
         <textarea
+          v-model="$v.form.message.$model"
           class="
             width-90
             margin-x-auto
@@ -172,6 +172,7 @@
             padding-1rem
             xlg-text-20
             text-25
+            margin-top-1rem
           "
           placeholder="اكتب رسالتك"
         ></textarea>
@@ -193,7 +194,8 @@
           margin-x-auto margin-top-2rem
         "
         type="submit"
-        nameBtn="ارسال"
+        :disabled="disable"
+        :nameBtn="textBtn ? textBtn : 'ارسال'"
       >
         <span
           v-show="statusAlert"
@@ -220,7 +222,6 @@ export default {
   name: "Form",
   data() {
     return {
-      statusAlert: false,
       form: {
         name: null,
         email: null,
@@ -228,6 +229,9 @@ export default {
         contact_type: "ارسال شكوى",
       },
       contactType: ["ارسال شكوى", "اقتراح", "استفسار"],
+      statusAlert: false,
+      textBtn: null,
+      disable: false,
     };
   },
   validations: {
@@ -248,7 +252,26 @@ export default {
     submit() {
       // Check Form
       this.$v.$touch();
-      console.log("testing");
+      //
+      if (!this.$v.form.$invalid) {
+        this.statusAlert = true;
+        this.disable = true;
+        this.textBtn = "يتم الارسال";
+        //
+        this.$store
+          .dispatch(this.$Type.CONTACT_US, this.form)
+          .then(() => {
+            this.statusAlert = false;
+            this.textBtn = "تم الارسال";
+            //
+            setTimeout(() => location.reload(), 500);
+          })
+          .catch(() => {
+            this.statusAlert = false;
+            this.disable = false;
+            this.textBtn = "اعد المحاولة";
+          });
+      }
     },
   },
 };

@@ -94,6 +94,11 @@
     border: 2px solid;
     border-color: $light $light $light transparent;
   }
+
+  &-loading-2 {
+    border: 2px solid;
+    border-color: $red-light $red-light $red-light transparent;
+  }
 }
 
 //

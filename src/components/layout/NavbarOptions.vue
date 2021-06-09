@@ -4,33 +4,45 @@
     :class="[
       'options d-flex align-items-center  height-60px xlg-height-90px',
       {
-        'justify-content-center': $route.meta.head === 'المزيد',
+        'justify-content-center': ifHeadMore,
       },
       {
-        'justify-content-between': $route.meta.head !== 'المزيد',
+        'justify-content-between': !ifHeadMore,
       },
     ]"
   >
-    <Search v-show="$route.meta.head === 'الرئيسية'" />
     <!--  -->
-    <template v-if="renderEl">
+    <Search
+      :class="{ 'order-0': ifHeadHome }"
+      @focused="hide = false"
+      @blured="hide = true"
+      v-show="ifHeadHome"
+    />
+    <!--  -->
+    <template v-if="!ifHeadHome && !ifHeadMore">
       <!--  -->
       <GoBack :showText="false" />
       <!--  -->
-      <p role="head" class="text-22 text-black weight-bold margin-start-2rem">
-        {{ $route.meta.head }}
-      </p>
+      <p
+        role="head"
+        class="text-22 text-black weight-bold margin-start-2rem"
+        v-text="getHead"
+      />
     </template>
     <!--  -->
-    <router-link :to="{ name: 'Home' }" class="height-60px xlg-height-90px">
+    <router-link
+      v-show="hide"
+      :to="{ name: 'Home' }"
+      :class="['height-60px xlg-height-90px', { 'order--1': ifHeadHome }]"
+    >
       <img
-        class="resize-img d-block margin-start-auto"
+        class="resize-img d-block margin-x-1rem"
         src="/logo/logo.png"
         alt="logo"
       />
     </router-link>
     <!--  -->
-    <Notifi v-show="$route.meta.head === 'الرئيسية'" />
+    <Notifi class="xlg-margin-start-auto" v-show="ifHeadHome && hide" />
   </div>
 </template>
 
@@ -40,12 +52,20 @@ import Search from "@/components/Options/Search";
 //
 export default {
   name: "NavbarOptions",
+  data() {
+    return {
+      hide: true,
+    };
+  },
   computed: {
-    renderEl() {
-      return (
-        this.$route.meta.head !== "الرئيسية" &&
-        this.$route.meta.head !== "المزيد"
-      );
+    getHead() {
+      return this.$route.meta.head;
+    },
+    ifHeadHome() {
+      return this.$route.meta.head === "الرئيسية";
+    },
+    ifHeadMore() {
+      return this.$route.meta.head === "المزيد";
     },
   },
   components: {
@@ -55,4 +75,15 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.order {
+  //
+  &--1 {
+    order: -1;
+  }
+  //
+  &-0 {
+    order: 0;
+  }
+}
+</style>
