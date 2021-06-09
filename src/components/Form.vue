@@ -242,7 +242,7 @@
             $v.form.password.$dirty
           "
         >
-          يجب الادخال لا يقل عن ١٠
+          يجب الادخال لا يقل عن ٨
         </p>
       </div>
       <!-- Confirm Password -->
@@ -449,7 +449,7 @@ export default {
       },
       password: {
         required,
-        minLength: minLength(5),
+        minLength: minLength(8),
       },
       confirmPassword: {
         samePassword: sameAs("password"),
