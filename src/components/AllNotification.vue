@@ -2,7 +2,7 @@
   <div
     role="all-notification"
     :class="[
-      'all-notification shadow-all-notifi position-abs bg-light-1 height-100 max-height-100 overflow-auto',
+      'all-notification shadow-all-notifi bg-light-1 position-abs height-100 max-height-100 overflow-auto',
       {
         'd-flex justify-content-center align-items-center':
           getNotifi.length === 0,

@@ -17,17 +17,12 @@
       <NavbarOptions />
       <!--  -->
       <div
-        class="
-          bg-light-1
-          margin-top-2rem
-          radius-card
-          overflow-auto
-          max-height-88
-          min-height-88
-          position-rel
-          overflow-x
-          wrapper
-        "
+        ref="wrapper"
+        :class="[
+          'bg-light-1 margin-top-2rem radius-card max-height-88 min-height-88 position-rel overflow-x wrapper',
+          { 'overflow-hidden': getToggleNotifi },
+          { 'overflow-auto': !getToggleNotifi },
+        ]"
       >
         <!-- Pages -->
         <router-view />
@@ -60,7 +55,12 @@ export default {
     };
   },
   computed: {
+    //
     getStatusToggleNotifi() {
+      return this.$store.getters[this.$Type.GET_TOGGLE_NOTIFI];
+    },
+    //
+    getToggleNotifi() {
       return this.$store.getters[this.$Type.GET_TOGGLE_NOTIFI];
     },
   },
@@ -70,6 +70,11 @@ export default {
     Model,
     ConfirmAlert,
     AllNotification,
+  },
+  watch: {
+    getToggleNotifi(n) {
+      if (n) this.$refs.wrapper.scrollTop = 0;
+    },
   },
 };
 </script>
