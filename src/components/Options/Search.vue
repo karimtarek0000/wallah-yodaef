@@ -1,13 +1,6 @@
 <template>
   <figure
-    class="
-      d-flex
-      align-items-center
-      border-all-red
-      radius-100
-      width-30rem
-      md-flex-grow-1
-    "
+    class="d-flex align-items-center border-all-red radius-100 md-flex-grow-1"
   >
     <GSvg
       class="svg-22 fill-red-light cursor-pointer margin-start-1rem"
