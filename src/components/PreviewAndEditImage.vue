@@ -25,15 +25,10 @@
           <img
             ref="image"
             v-if="imageUser"
-            :src="`/${imageUser}`"
+            :src="`${imageUser}`"
             class="resize-img"
           />
           <img ref="image" v-else src="/img/avatar.png" class="resize-img" />
-          <!-- Show image when user selected image -->
-          <!-- <template v-else>
-            <img class="resize-img" v-if="imageUser" :src="`/${imageUser}`" />
-            <img ref="image" v-else src="/img/avatar.png" class="resize-img" />
-          </template> -->
         </figure>
         <!--  -->
         <label

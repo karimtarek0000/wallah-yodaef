@@ -130,9 +130,11 @@ const actions = {
       },
     } = await axios.get("/user_profile");
     //
+    const reImage = `http://www.donates.algalya.com/${image}`;
+    //
     const profileUser = await Object.assign(
       {},
-      { name, image, phone, readNotifi, unreadNotifi }
+      { name, image: reImage, phone, readNotifi, unreadNotifi }
     );
     //
     commit(Type.SET_PROFILE_USER, profileUser);
