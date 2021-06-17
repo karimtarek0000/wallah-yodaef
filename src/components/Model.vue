@@ -160,26 +160,18 @@ export default {
       if (e.key === "Escape") this.close();
     },
     //
-    async donate() {
-      // 1) - GET CASH WALLET
-      await this.GET_WALLET();
-      // 2) - IF AMOUNT LETH THAN OR EQAL GETWALLET WILL RUN ALL ACTIONS
-      if (this.amount <= this.getWallet) {
+    donate() {
+      this.DONATE(this.amount).then(() => {
+        this.textBtn = "تم التبرع";
+        this.messageNoMony = null;
+        this.amount = null;
         //
-        this.DONATE(this.amount).then(() => {
-          this.textBtn = "تم التبرع";
-          this.messageNoMony = null;
-          this.amount = null;
-          //
-          setTimeout(() => {
-            this.textBtn = "تاكيد";
-            this.close();
-            this.COUNT_NOTIFI();
-          }, 500);
-        });
-      } else {
-        this.messageNoMony = "القيمه المدخله اكبر من الرصيد";
-      }
+        setTimeout(() => {
+          this.textBtn = "تاكيد";
+          this.close();
+          this.COUNT_NOTIFI();
+        }, 500);
+      });
     },
     //
     wallet() {
