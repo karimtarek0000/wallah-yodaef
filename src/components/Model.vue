@@ -170,6 +170,10 @@ export default {
           this.textBtn = "تاكيد";
           this.close();
           this.COUNT_NOTIFI();
+          this.$store.commit(this.$Type.SET_STATUS_ACTION, {
+            type: "runActionDonation",
+            status: true,
+          });
         }, 500);
       });
     },
@@ -184,6 +188,10 @@ export default {
           this.textBtn = "شحن الرصيد";
           this.GET_WALLET();
           this.close();
+          this.$store.commit(this.$Type.SET_STATUS_ACTION, {
+            type: "runActionWallet",
+            status: true,
+          });
         }, 500);
       });
     },

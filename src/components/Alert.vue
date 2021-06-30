@@ -13,7 +13,10 @@
         bg-red-light
       "
     >
-      <p v-text="getInfoAlert.text" />
+      <p v-if="type === 'wait' && getWait > 0">
+        يرجى الانتظار دقيقة / باقي: {{ getWait }} ثانية
+      </p>
+      <p v-else v-text="getInfoAlert.text" />
     </div>
   </transition>
 </template>
@@ -21,9 +24,22 @@
 <script>
 export default {
   name: "Alert",
+  props: {
+    type: {
+      type: String,
+      default: "",
+    },
+  },
   computed: {
+    //
     getInfoAlert() {
       return this.$store.getters[this.$Type.GET_ALERT];
+    },
+    //
+    getWait() {
+      return this.$route.meta.head === "الرئيسية"
+        ? this.$store.getters[this.$Type.GET_WAIT_DONATION]
+        : this.$store.getters[this.$Type.GET_WAIT_WALLET];
     },
   },
   watch: {
@@ -47,6 +63,7 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
+  min-width: 40rem;
 }
 
 .alert-enter-active {

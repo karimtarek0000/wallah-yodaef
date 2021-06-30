@@ -36,6 +36,8 @@
     <Model />
     <!--  -->
     <ConfirmAlert />
+    <!--  -->
+    <Alert type="wait" />
   </div>
 </template>
 
@@ -46,6 +48,8 @@ import NavbarOptions from "@/components/layout/NavbarOptions";
 import Model from "@/components/Model";
 import ConfirmAlert from "@/components/ConfirmAlert";
 import AllNotification from "@/components/AllNotification";
+import Alert from "@/components/Alert";
+
 //
 export default {
   name: "Index",
@@ -63,6 +67,14 @@ export default {
     getToggleNotifi() {
       return this.$store.getters[this.$Type.GET_TOGGLE_NOTIFI];
     },
+    //
+    statusRunActionDonation() {
+      return this.$store.state.Other.runActionDonation;
+    },
+    //
+    statusRunActionWallet() {
+      return this.$store.state.Other.runActionWallet;
+    },
   },
   components: {
     Navbar,
@@ -70,10 +82,21 @@ export default {
     Model,
     ConfirmAlert,
     AllNotification,
+    Alert,
   },
   watch: {
+    //
     getToggleNotifi(n) {
       if (n) this.$refs.wrapper.scrollTop = 0;
+    },
+    //
+    statusRunActionDonation(n) {
+      if (n)
+        this.$store.dispatch(this.$Type.SET_TIME_ACTION, "runActionDonation");
+    },
+    statusRunActionWallet(n) {
+      if (n)
+        this.$store.dispatch(this.$Type.SET_TIME_ACTION, "runActionWallet");
     },
   },
 };

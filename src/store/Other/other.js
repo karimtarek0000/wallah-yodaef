@@ -19,6 +19,11 @@ const state = {
     status: false,
     text: null,
   },
+  waitActionDonation: 0,
+  waitActionWallet: 0,
+  runActionDonation: false,
+  runActionWallet: false,
+  waitSeconds: 60,
   notification: {
     count: {
       unread_notifications: 0,
@@ -50,6 +55,14 @@ const getters = {
   [Type.GET_NOTIFI](state) {
     return state.notification;
   },
+  //
+  [Type.GET_WAIT_DONATION](state) {
+    return state.waitActionDonation;
+  },
+  //
+  [Type.GET_WAIT_WALLET](state) {
+    return state.waitActionWallet;
+  },
 };
 
 //
@@ -78,6 +91,23 @@ const mutations = {
   [Type.SET_DATA_NOTIFI](state, payload) {
     state.notification[payload.type] = payload.data;
   },
+  //
+  [Type.SET_STATUS_ACTION](state, payload) {
+    state[payload.type] = payload.status;
+  },
+  [Type.SET_WAIT](state, type) {
+    //
+    const setType =
+      type === "runActionDonation" ? "waitActionDonation" : "waitActionWallet";
+    //
+    let counter = state.waitSeconds;
+    // 1) - Set interval wiil be decrement counter to 0
+    let handelSetInterval = setInterval(() => {
+      if (counter > 0) state[setType] = counter--;
+    }, 1000);
+    // 2) - If counter equal 0 will be clear interval from memory
+    if (counter === 0) clearInterval(handelSetInterval);
+  },
 };
 
 //
@@ -97,6 +127,17 @@ const actions = {
     });
     //
     commit(Type.SET_DATA_NOTIFI, { type: "notifi", data: newData });
+  },
+  //
+  [Type.SET_TIME_ACTION]({ commit, state }, type) {
+    const setSeconds = state.waitSeconds * 1000;
+    //
+    setTimeout(
+      () => commit(Type.SET_STATUS_ACTION, { type, status: false }),
+      setSeconds
+    );
+    //
+    commit(Type.SET_WAIT, type);
   },
 };
 

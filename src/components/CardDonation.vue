@@ -49,18 +49,30 @@ export default {
       required: true,
     },
   },
+  computed: {
+    statusRunActionDonation() {
+      return this.$store.state.Other.runActionDonation;
+    },
+  },
   methods: {
     openModel() {
-      // 1) - OPEN MODEL
-      this.$store.commit(this.$Type.SET_STATUS_MODEL_DONATION, {
-        status: true,
-        icon: "balance",
-        title: "أدخل المبلغ الذي تريد التبرع به",
-        nameBtn: "تاكيد",
-        type: "donate",
-      });
-      // 2) - SEND DATA TO VUEX
-      this.$store.commit(this.$Type.SET_DATA_MODEL, this.data);
+      if (this.statusRunActionDonation) {
+        this.$store.commit(this.$Type.SET_ALERT, {
+          status: true,
+          text: "",
+        });
+      } else {
+        // 1) - OPEN MODEL
+        this.$store.commit(this.$Type.SET_STATUS_MODEL_DONATION, {
+          status: true,
+          icon: "balance",
+          title: "أدخل المبلغ الذي تريد التبرع به",
+          nameBtn: "تاكيد",
+          type: "donate",
+        });
+        // 2) - SEND DATA TO VUEX
+        this.$store.commit(this.$Type.SET_DATA_MODEL, this.data);
+      }
     },
   },
 };

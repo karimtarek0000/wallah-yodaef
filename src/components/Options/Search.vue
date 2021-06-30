@@ -32,10 +32,11 @@ export default {
   name: "Search",
   data() {
     return {
-      search: null,
+      search: "",
     };
   },
   computed: {
+    //
     searchData: {
       get() {
         return this.search;
@@ -45,11 +46,15 @@ export default {
         this.SEARCH(val);
       },
     },
+    //
+    statusDestroyedHome() {
+      return this.$store.state.Pages.destroyedHome;
+    },
   },
   methods: {
     SEARCH: debounce(function (val) {
       this.$store.dispatch(this.$Type.SEARCH, val);
-    }, 600),
+    }, 700),
     //
     EMIT(emit) {
       const windowWidth = window.innerWidth;
@@ -65,8 +70,13 @@ export default {
     },
     //
     resetSearch() {
-      this.search = null;
+      this.search = "";
       this.$store.dispatch(this.$Type.SEARCH);
+    },
+  },
+  watch: {
+    statusDestroyedHome(n) {
+      if (n) this.search = "";
     },
   },
 };

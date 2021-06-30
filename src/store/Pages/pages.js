@@ -10,6 +10,8 @@ const state = {
   wallet: null,
   //
   dataModel: null,
+  //
+  destroyedHome: false,
 };
 
 //
@@ -65,6 +67,10 @@ const mutations = {
   //
   [Type.SET_CASH_WALLET](state, payload) {
     state.wallet = payload;
+  },
+  //
+  [Type.SET_DESTROYED_HOME](state, payload) {
+    state.destroyedHome = payload;
   },
 };
 
@@ -129,8 +135,7 @@ const actions = {
     }
   },
   //
-  // eslint-disable-next-line no-unused-vars
-  async [Type.CONTACT_US]({ commit }, data) {
+  async [Type.CONTACT_US](_, data) {
     try {
       await axios.post("/contact_us", data);
       return Promise.resolve(true);

@@ -61,22 +61,33 @@
 <script>
 export default {
   name: "Wallet",
-  methods: {
-    openModel() {
-      // 1) - OPEN MODEL
-      this.$store.commit(this.$Type.SET_STATUS_MODEL_DONATION, {
-        status: true,
-        icon: "hand",
-        title: "أدخل المبلغ الذي تريد شحنه في المحفظة",
-        nameBtn: "شحن الرصيد",
-        type: "wallet",
-      });
-      //
-    },
-  },
   computed: {
+    //
     getCashWallet() {
       return this.$store.getters[this.$Type.GET_CASH_WALLET];
+    },
+    //
+    statusRunActionWallet() {
+      return this.$store.state.Other.runActionWallet;
+    },
+  },
+  methods: {
+    openModel() {
+      if (this.statusRunActionWallet) {
+        this.$store.commit(this.$Type.SET_ALERT, {
+          status: true,
+          text: "",
+        });
+      } else {
+        // 1) - OPEN MODEL
+        this.$store.commit(this.$Type.SET_STATUS_MODEL_DONATION, {
+          status: true,
+          icon: "hand",
+          title: "أدخل المبلغ الذي تريد شحنه في المحفظة",
+          nameBtn: "شحن الرصيد",
+          type: "wallet",
+        });
+      }
     },
   },
   created() {

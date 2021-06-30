@@ -62,6 +62,11 @@ export default {
     await this.$store.dispatch(this.$Type.DONATIONS_SHOW);
     //
     this.loading = false;
+    //
+    this.$store.commit(this.$Type.SET_DESTROYED_HOME, false);
+  },
+  destroyed() {
+    this.$store.commit(this.$Type.SET_DESTROYED_HOME, true);
   },
 };
 </script>

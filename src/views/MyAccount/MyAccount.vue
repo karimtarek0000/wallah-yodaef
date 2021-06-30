@@ -51,7 +51,11 @@ export default {
     sendNewData() {
       this.$store
         .dispatch(this.$Type.UPDATE_PROFILE, this.dataUser)
-        .then(() => setTimeout(() => location.reload(), 500))
+        .then(() => {
+          setTimeout(() => {
+            this.$store.dispatch(this.$Type.SIGN_OUT);
+          }, 500);
+        })
         .catch(() => setTimeout(() => location.reload(), 500));
     },
     //
@@ -68,7 +72,7 @@ export default {
       await this.$store.dispatch(this.$Type.UPDATE_IMAGE, this.newImage);
       await this.$store.dispatch(this.$Type.UPDATE_PROFILE, this.dataUser);
       //
-      setTimeout(() => location.reload(), 500);
+      setTimeout(() => this.$store.dispatch(this.$Type.SIGN_OUT), 500);
     },
   },
   computed: {
@@ -80,8 +84,8 @@ export default {
     PreviewAndEditImage,
   },
   async created() {
-    //
-    await this.$store.dispatch(this.$Type.PROFILE_USER);
+    if (this.getProfileUser === null)
+      await this.$store.dispatch(this.$Type.PROFILE_USER);
     this.dataUser.name = this.getProfileUser.name;
     this.dataUser.phone = this.getProfileUser.phone;
     this.image = this.getProfileUser.image;
